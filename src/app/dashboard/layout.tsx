@@ -89,17 +89,9 @@ export default function DashboardLayout({
 
                 <div className="absolute bottom-4 left-4 right-4 space-y-2">
                     <div className="p-4 rounded-lg bg-muted/50 border border-border">
-                        <p className="text-xs font-medium text-muted-foreground mb-2">My Plan: Basic</p>
-                        <div className="flex items-center justify-between text-xs mb-1">
-                            <span>Posts</span>
-                            <span>12/15</span>
-                        </div>
-                        <div className="h-1.5 w-full bg-muted rounded-full overflow-hidden">
-                            <div className="h-full bg-primary w-[80%]" />
-                        </div>
-                        <Link href="/dashboard/upgrade" className="block mt-3">
-                            <Button size="sm" variant="outline" className="w-full text-xs h-7">
-                                Upgrade
+                        <Link href="/dashboard/upgrade" className="block">
+                            <Button size="sm" className="w-full text-xs h-8 shadow-sm">
+                                Upgrade Plan
                             </Button>
                         </Link>
                     </div>
@@ -129,11 +121,11 @@ export default function DashboardLayout({
                         <div className="hidden md:flex items-center gap-3 px-3 py-1.5 rounded-full bg-muted/30 border border-border">
                             <div className="flex items-center gap-2 border-r border-border pr-3">
                                 <Building2 className="h-4 w-4 text-muted-foreground" />
-                                <span className="text-sm font-medium">Business: X</span>
+                                <span className="text-sm font-medium">Select Business</span>
                             </div>
                             <div className="flex items-center gap-1.5 pl-1">
-                                <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                                <span className="text-xs font-medium text-muted-foreground">Connected</span>
+                                <div className="h-2 w-2 rounded-full bg-gray-300" />
+                                <span className="text-xs font-medium text-muted-foreground">Not Connected</span>
                             </div>
                         </div>
                     </div>
@@ -141,8 +133,7 @@ export default function DashboardLayout({
                     <div className="ml-auto flex items-center gap-4">
                         <div className="flex items-center gap-3">
                             <div className="text-right hidden sm:block">
-                                <p className="text-sm font-medium">John Doe</p>
-                                <p className="text-xs text-muted-foreground">Business Owner</p>
+                                <p className="text-sm font-medium">User</p>
                             </div>
                             <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
                                 <User className="h-5 w-5 text-primary" />
