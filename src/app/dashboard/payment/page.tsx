@@ -4,10 +4,10 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, CreditCard, Loader2 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, Suspense } from "react";
 import { FadeIn } from "@/components/ui/fade-in";
 
-export default function PaymentPage() {
+function PaymentContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const plan = searchParams.get("plan") || "Plan";
@@ -28,87 +28,115 @@ export default function PaymentPage() {
         }, 2000);
     };
 
-    if (success) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-4">
-                <div className="h-16 w-16 bg-green-100 rounded-full flex items-center justify-center">
-                    <CheckCircle2 className="h-8 w-8 text-green-600" />
-                </div>
-                <h1 className="text-2xl font-bold">Payment Successful!</h1>
-                <p className="text-muted-foreground">You are now subscribed to the {plan}.</p>
-                <p className="text-sm text-muted-foreground">Redirecting to dashboard...</p>
-            </div>
-        );
-    }
-
     return (
-        <div className="max-w-md mx-auto py-10">
-            <FadeIn>
-                <Card>
+        <FadeIn>
+            <div className="min-h-screen flex items-center justify-center p-4">
+                <Card className="w-full max-w-2xl">
                     <CardHeader>
-                        <CardTitle>Complete Your Upgrade</CardTitle>
-                        <CardDescription>Secure payment for {plan}</CardDescription>
+                        <CardTitle className="text-2xl">Complete Your Purchase</CardTitle>
+                        <CardDescription>
+                            You&apos;re upgrading to the <span className="font-semibold text-foreground">{plan}</span> plan
+                        </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6">
-                        <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
-                            <div>
-                                <p className="font-medium">{plan}</p>
-                                <p className="text-sm text-muted-foreground">Monthly subscription</p>
+                        {success ? (
+                            <div className="text-center py-8">
+                                <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                                    <CheckCircle2 className="h-8 w-8 text-green-600" />
+                                </div>
+                                <h3 className="text-xl font-semibold mb-2">Payment Successful!</h3>
+                                <p className="text-muted-foreground">
+                                    Redirecting you to the dashboard...
+                                </p>
                             </div>
-                            <p className="text-xl font-bold">{price}</p>
-                        </div>
+                        ) : (
+                            <>
+                                <div className="bg-muted/50 p-6 rounded-lg space-y-4">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-muted-foreground">Plan</span>
+                                        <span className="font-semibold">{plan}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-muted-foreground">Billing Cycle</span>
+                                        <span className="font-semibold">Monthly</span>
+                                    </div>
+                                    <div className="border-t pt-4 flex justify-between items-center">
+                                        <span className="text-lg font-semibold">Total</span>
+                                        <span className="text-2xl font-bold text-primary">{price}</span>
+                                    </div>
+                                </div>
 
-                        <div className="space-y-4">
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">Card Number</label>
-                                <div className="relative">
-                                    <CreditCard className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                                    <input
-                                        type="text"
-                                        placeholder="0000 0000 0000 0000"
-                                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 pl-9 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                                        disabled
-                                    />
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">Expiry</label>
-                                    <input
-                                        type="text"
-                                        placeholder="MM/YY"
-                                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                                        disabled
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">CVC</label>
-                                    <input
-                                        type="text"
-                                        placeholder="123"
-                                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                                        disabled
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="text-sm font-medium mb-2 block">Card Number</label>
+                                        <div className="relative">
+                                            <input
+                                                type="text"
+                                                placeholder="1234 5678 9012 3456"
+                                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                                                disabled={loading}
+                                            />
+                                            <CreditCard className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                        </div>
+                                    </div>
 
-                        <div className="bg-yellow-50 text-yellow-800 text-xs p-3 rounded-md">
-                            This is a demo payment page. No real money will be charged.
-                        </div>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="text-sm font-medium mb-2 block">Expiry Date</label>
+                                            <input
+                                                type="text"
+                                                placeholder="MM/YY"
+                                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                                                disabled={loading}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm font-medium mb-2 block">CVV</label>
+                                            <input
+                                                type="text"
+                                                placeholder="123"
+                                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                                                disabled={loading}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </CardContent>
-                    <CardFooter>
-                        <Button
-                            className="w-full"
-                            onClick={handlePayment}
-                            disabled={loading}
-                        >
-                            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                            {loading ? "Processing..." : `Pay ${price}`}
-                        </Button>
-                    </CardFooter>
+                    {!success && (
+                        <CardFooter>
+                            <Button
+                                onClick={handlePayment}
+                                disabled={loading}
+                                className="w-full"
+                                size="lg"
+                            >
+                                {loading ? (
+                                    <>
+                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                        Processing...
+                                    </>
+                                ) : (
+                                    <>Pay {price}</>
+                                )}
+                            </Button>
+                        </CardFooter>
+                    )}
                 </Card>
-            </FadeIn>
-        </div>
+            </div>
+        </FadeIn>
+    );
+}
+
+export default function PaymentPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            </div>
+        }>
+            <PaymentContent />
+        </Suspense>
     );
 }

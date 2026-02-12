@@ -11,12 +11,56 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "@/components/ui/logo";
+import { StructuredData } from "@/components/seo/structured-data";
+import {
+  generateOrganizationSchema,
+  generateSoftwareApplicationSchema,
+  generateWebSiteSchema,
+  generateHowToSchema,
+  generateFAQSchema,
+} from "@/lib/seo";
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Generate structured data for SEO
+  const structuredData = [
+    generateOrganizationSchema(),
+    generateSoftwareApplicationSchema(),
+    generateWebSiteSchema(),
+    generateHowToSchema({
+      name: "How to Automate Your Google Business Profile",
+      description: "Set up automated review replies, blog posts, and image generation for your Google Business Profile in 3 simple steps.",
+      steps: steps.map(step => ({ name: step.title, text: step.description })),
+    }),
+    generateFAQSchema([
+      {
+        question: "How does ReplyBuzz automate Google Business Profile management?",
+        answer: "ReplyBuzz uses advanced AI to automatically respond to reviews 24/7, publish daily SEO-optimized blog posts, and generate professional images for your Google Business Profile. Simply connect your account and our AI handles everything on autopilot.",
+      },
+      {
+        question: "Will the automated replies sound natural and professional?",
+        answer: "Yes! Our AI learns your brand voice and creates personalized, contextual responses that sound human and professional. Each reply is tailored to the specific review content and your business type.",
+      },
+      {
+        question: "How quickly are reviews responded to?",
+        answer: "Reviews are responded to within minutes of being posted, 24/7. Our AI monitors your Google Business Profile continuously and generates appropriate responses instantly.",
+      },
+      {
+        question: "Can I manage multiple business locations?",
+        answer: "Yes! Our Pro plan supports up to 3 locations, and our Enterprise plan offers unlimited multi-location support with centralized management from a single dashboard.",
+      },
+      {
+        question: "What happens if I exceed my daily reply limit?",
+        answer: "If you exceed your daily reply limit, additional replies are available at ₹5 per 10 replies. Your daily limit automatically resets every 24 hours.",
+      },
+    ]),
+  ];
+
   return (
     <div className="min-h-screen bg-background text-foreground scroll-smooth">
+      {/* SEO Structured Data */}
+      <StructuredData data={structuredData} />
       {/* Navigation */}
       <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -84,7 +128,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-32 md:pt-32 md:pb-48 bg-white">
+      <section className="relative pt-20 pb-32 md:pt-32 md:pb-48 bg-white" aria-label="Hero section">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center space-y-8">
             <div className="inline-flex">
@@ -136,10 +180,10 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-24 bg-gray-50">
+      <section id="features" className="py-24 bg-gray-50" aria-labelledby="features-heading">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
+            <h2 id="features-heading" className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
               Everything You Need to Automate Your Business
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -164,10 +208,10 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-24 bg-white border-y border-gray-100">
+      <section id="how-it-works" className="py-24 bg-white border-y border-gray-100" aria-labelledby="how-it-works-heading">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+            <h2 id="how-it-works-heading" className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
               Get Started in 3 Simple Steps
             </h2>
             <p className="text-muted-foreground text-lg">
@@ -195,10 +239,10 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 bg-gray-50">
+      <section id="pricing" className="py-24 bg-gray-50" aria-labelledby="pricing-heading">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
+            <h2 id="pricing-heading" className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
               Simple, Transparent Pricing
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">

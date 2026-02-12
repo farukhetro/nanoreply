@@ -1,17 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "@/components/providers/toast-provider";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Logo } from "@/components/ui/logo";
 
 export default function LoginPage() {
     const { toast } = useToast();
-    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     const handleGoogleLogin = async () => {

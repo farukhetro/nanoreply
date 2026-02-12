@@ -32,17 +32,17 @@ export default function DPAPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">1. Definitions and Interpretation</h2>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            This Data Processing Agreement ("DPA") forms part of the Terms of Service between you ("Customer," "Data Controller," or "you") and ReplyBuzz ("Processor," "we," "us," or "our") and governs the processing of personal data by ReplyBuzz on behalf of the Customer in connection with the provision of the Service.
+                            This Data Processing Agreement (&quot;DPA&quot;) forms part of the Terms of Service between you (&quot;Customer,&quot; &quot;Data Controller,&quot; or &quot;you&quot;) and ReplyBuzz (&quot;Processor,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) and governs the processing of personal data by ReplyBuzz on behalf of the Customer in connection with the provision of the Service.
                         </p>
                         <p className="text-muted-foreground leading-relaxed mb-4">
                             For the purposes of this DPA, the following terms shall have the meanings set forth below:
                         </p>
                         <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                            <li><strong>"Personal Data"</strong> means any information relating to an identified or identifiable natural person that is processed by ReplyBuzz on behalf of the Customer in connection with the Service.</li>
-                            <li><strong>"Data Subject"</strong> means the individual to whom Personal Data relates.</li>
-                            <li><strong>"Processing"</strong> means any operation or set of operations performed on Personal Data, whether or not by automated means, including collection, recording, organization, structuring, storage, adaptation, retrieval, consultation, use, disclosure, dissemination, restriction, erasure, or destruction.</li>
-                            <li><strong>"Sub-processor"</strong> means any third party engaged by ReplyBuzz to process Personal Data on behalf of the Customer.</li>
-                            <li><strong>"Data Protection Laws"</strong> means all applicable laws and regulations relating to the processing of Personal Data, including the General Data Protection Regulation (GDPR) (EU) 2016/679 and any successor legislation.</li>
+                            <li><strong>&quot;Personal Data&quot;</strong> means any information relating to an identified or identifiable natural person that is processed by ReplyBuzz on behalf of the Customer in connection with the Service.</li>
+                            <li><strong>&quot;Data Subject&quot;</strong> means the individual to whom Personal Data relates.</li>
+                            <li><strong>&quot;Processing&quot;</strong> means any operation or set of operations performed on Personal Data, whether or not by automated means, including collection, recording, organization, structuring, storage, adaptation, retrieval, consultation, use, disclosure, dissemination, restriction, erasure, or destruction.</li>
+                            <li><strong>&quot;Sub-processor&quot;</strong> means any third party engaged by ReplyBuzz to process Personal Data on behalf of the Customer.</li>
+                            <li><strong>&quot;Data Protection Laws&quot;</strong> means all applicable laws and regulations relating to the processing of Personal Data, including the General Data Protection Regulation (GDPR) (EU) 2016/679 and any successor legislation.</li>
                         </ul>
                     </section>
 
@@ -62,21 +62,21 @@ export default function DPAPage() {
                             ReplyBuzz shall:
                         </p>
                         <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                            <li>Process Personal Data only in accordance with the Customer's documented instructions and comply with all applicable Data Protection Laws;</li>
+                            <li>Process Personal Data only in accordance with the Customer&apos;s documented instructions and comply with all applicable Data Protection Laws;</li>
                             <li>Ensure that persons authorized to process Personal Data are subject to confidentiality obligations;</li>
                             <li>Implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including encryption, pseudonymization, access controls, and regular security assessments;</li>
                             <li>Assist the Customer in responding to Data Subject requests to exercise their rights under Data Protection Laws (e.g., access, rectification, erasure, data portability);</li>
                             <li>Assist the Customer in ensuring compliance with obligations relating to security, breach notifications, data protection impact assessments, and prior consultations with supervisory authorities;</li>
-                            <li>At the Customer's choice, delete or return all Personal Data to the Customer after the end of the provision of services, and delete existing copies unless retention is required by applicable law;</li>
+                            <li>At the Customer&apos;s choice, delete or return all Personal Data to the Customer after the end of the provision of services, and delete existing copies unless retention is required by applicable law;</li>
                             <li>Make available to the Customer all information necessary to demonstrate compliance with this DPA and allow for and contribute to audits and inspections conducted by the Customer or an authorized auditor;</li>
-                            <li>Notify the Customer without undue delay upon becoming aware of a Personal Data breach affecting the Customer's Personal Data.</li>
+                            <li>Notify the Customer without undue delay upon becoming aware of a Personal Data breach affecting the Customer&apos;s Personal Data.</li>
                         </ul>
                     </section>
 
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">4. Sub-processing</h2>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            The Customer authorizes ReplyBuzz to engage Sub-processors to process Personal Data on the Customer's behalf. ReplyBuzz shall enter into a written agreement with each Sub-processor imposing data protection obligations no less protective than those set forth in this DPA. ReplyBuzz shall remain fully liable to the Customer for the performance of any Sub-processor's obligations.
+                            The Customer authorizes ReplyBuzz to engage Sub-processors to process Personal Data on the Customer&apos;s behalf. ReplyBuzz shall enter into a written agreement with each Sub-processor imposing data protection obligations no less protective than those set forth in this DPA. ReplyBuzz shall remain fully liable to the Customer for the performance of any Sub-processor&apos;s obligations.
                         </p>
                         <p className="text-muted-foreground leading-relaxed mb-4">
                             A list of current Sub-processors is provided in Annex B to this DPA. ReplyBuzz shall inform the Customer of any intended changes concerning the addition or replacement of Sub-processors, giving the Customer the opportunity to object to such changes on reasonable grounds within thirty (30) days of notification. If the Customer does not object within this period, the changes shall be deemed accepted.
@@ -105,7 +105,7 @@ export default function DPAPage() {
                         </p>
                         <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                             <li>A description of the nature of the breach, including the categories and approximate number of Data Subjects and Personal Data records affected;</li>
-                            <li>The name and contact details of ReplyBuzz's data protection officer or other contact point for further information;</li>
+                            <li>The name and contact details of ReplyBuzz&apos;s data protection officer or other contact point for further information;</li>
                             <li>A description of the likely consequences of the breach;</li>
                             <li>A description of the measures taken or proposed to be taken to address the breach and mitigate its potential adverse effects.</li>
                         </ul>
@@ -127,24 +127,24 @@ export default function DPAPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">8. Audits and Compliance</h2>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            ReplyBuzz shall make available to the Customer all information necessary to demonstrate compliance with this DPA and Data Protection Laws. The Customer or an independent auditor appointed by the Customer may, upon reasonable notice and during normal business hours, conduct audits or inspections of ReplyBuzz's data processing activities, systems, and facilities to verify compliance with this DPA.
+                            ReplyBuzz shall make available to the Customer all information necessary to demonstrate compliance with this DPA and Data Protection Laws. The Customer or an independent auditor appointed by the Customer may, upon reasonable notice and during normal business hours, conduct audits or inspections of ReplyBuzz&apos;s data processing activities, systems, and facilities to verify compliance with this DPA.
                         </p>
                         <p className="text-muted-foreground leading-relaxed">
-                            Such audits shall not unreasonably interfere with ReplyBuzz's business operations and shall be conducted no more than once per year, unless required by a supervisory authority or in response to a suspected breach. The Customer shall bear all costs associated with such audits. ReplyBuzz may require the auditor to execute a confidentiality agreement before granting access to its facilities or systems.
+                            Such audits shall not unreasonably interfere with ReplyBuzz&apos;s business operations and shall be conducted no more than once per year, unless required by a supervisory authority or in response to a suspected breach. The Customer shall bear all costs associated with such audits. ReplyBuzz may require the auditor to execute a confidentiality agreement before granting access to its facilities or systems.
                         </p>
                     </section>
 
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">9. Term and Termination</h2>
                         <p className="text-muted-foreground leading-relaxed">
-                            This DPA shall remain in effect for the duration of the Terms of Service and shall automatically terminate upon termination of the Terms of Service. Upon termination, ReplyBuzz shall, at the Customer's choice, delete or return all Personal Data to the Customer and delete existing copies, unless retention is required by applicable law. ReplyBuzz shall certify in writing to the Customer that it has complied with this obligation.
+                            This DPA shall remain in effect for the duration of the Terms of Service and shall automatically terminate upon termination of the Terms of Service. Upon termination, ReplyBuzz shall, at the Customer&apos;s choice, delete or return all Personal Data to the Customer and delete existing copies, unless retention is required by applicable law. ReplyBuzz shall certify in writing to the Customer that it has complied with this obligation.
                         </p>
                     </section>
 
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">10. Liability and Indemnification</h2>
                         <p className="text-muted-foreground leading-relaxed">
-                            Each party's liability under this DPA shall be subject to the limitations and exclusions of liability set forth in the Terms of Service. ReplyBuzz shall indemnify and hold harmless the Customer from and against any claims, damages, losses, or expenses arising from ReplyBuzz's breach of this DPA or Data Protection Laws, except to the extent caused by the Customer's instructions or actions.
+                            Each party&apos;s liability under this DPA shall be subject to the limitations and exclusions of liability set forth in the Terms of Service. ReplyBuzz shall indemnify and hold harmless the Customer from and against any claims, damages, losses, or expenses arising from ReplyBuzz&apos;s breach of this DPA or Data Protection Laws, except to the extent caused by the Customer&apos;s instructions or actions.
                         </p>
                     </section>
 
@@ -169,7 +169,7 @@ export default function DPAPage() {
                             </div>
                             <div>
                                 <p className="font-semibold mb-2">Categories of Data Subjects:</p>
-                                <p className="text-muted-foreground text-sm">Business owners, employees, and customers who interact with the Customer's Google Business Profile.</p>
+                                <p className="text-muted-foreground text-sm">Business owners, employees, and customers who interact with the Customer&apos;s Google Business Profile.</p>
                             </div>
                         </div>
                     </section>

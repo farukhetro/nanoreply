@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn, StaggerContainer } from "@/components/ui/fade-in";
@@ -13,7 +13,10 @@ export default function UpgradePage() {
 
     const handleUpgrade = (planName: string, price: string) => {
         if (price === "Contact Us") {
-            window.location.href = "mailto:sales@nanoreply.com";
+            if (typeof window !== 'undefined') {
+                // eslint-disable-next-line react-hooks/immutability
+                window.location.href = "mailto:sales@nanoreply.com";
+            }
             return;
         }
         router.push(`/dashboard/payment?plan=${encodeURIComponent(planName)}&price=${encodeURIComponent(price)}`);

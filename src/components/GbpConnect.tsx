@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Store, MapPin, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
@@ -22,21 +23,6 @@ export default function GbpConnect() {
     const [isConnected, setIsConnected] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const pollInterval = useRef<NodeJS.Timeout | null>(null);
-
-    useEffect(() => {
-        checkConnection();
-
-        // Listen for message from popup
-        const handleMessage = (event: MessageEvent) => {
-            if (event.origin !== window.location.origin) return;
-            if (event.data === "gbp-connected") {
-                checkConnection();
-            }
-        };
-
-        window.addEventListener("message", handleMessage);
-        return () => window.removeEventListener("message", handleMessage);
-    }, []);
 
     // Cleanup polling on unmount
     useEffect(() => {
@@ -80,6 +66,23 @@ export default function GbpConnect() {
             console.error("Error checking connection:", error);
         }
     };
+
+    useEffect(() => {
+        // eslint-disable-next-line
+        checkConnection();
+
+        // Listen for message from popup
+        const handleMessage = (event: MessageEvent) => {
+            if (event.origin !== window.location.origin) return;
+            if (event.data === "gbp-connected") {
+                checkConnection();
+            }
+        };
+
+        window.addEventListener("message", handleMessage);
+        return () => window.removeEventListener("message", handleMessage);
+    }, []);
+
 
     const handleConnect = async () => {
         try {
@@ -136,7 +139,7 @@ export default function GbpConnect() {
 
                 {!isConnected ? (
                     <Button onClick={handleConnect} disabled={loading} className="w-full sm:w-auto">
-                        {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" className="h-4 w-4 mr-2" />}
+                        {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Image src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" width={16} height={16} className="h-4 w-4 mr-2" />}
                         {loading ? "Connecting..." : "Connect Google Account"}
                     </Button>
                 ) : (

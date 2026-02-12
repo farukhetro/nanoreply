@@ -8,16 +8,14 @@ import { FadeIn, StaggerContainer } from "@/components/ui/fade-in";
 import { useToast } from "@/components/providers/toast-provider";
 import {
     Building2,
-    Settings as SettingsIcon,
     BrainCircuit,
     Link as LinkIcon
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 export default function SettingsPage() {
     const { toast } = useToast();
-    const router = useRouter();
+    // const router = useRouter(); // Removed unused router
     const [loading, setLoading] = useState(false);
 
     const [settings, setSettings] = useState({
@@ -87,7 +85,7 @@ export default function SettingsPage() {
         }
     };
 
-    const handleChange = (field: string, value: any) => {
+    const handleChange = (field: string, value: string | boolean) => {
         setSettings(prev => ({ ...prev, [field]: value }));
     };
 

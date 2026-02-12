@@ -34,7 +34,7 @@ export default function PrivacyPolicyPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
                         <p className="text-muted-foreground leading-relaxed">
-                            This Privacy Policy ("Policy") governs the manner in which ReplyBuzz ("Company," "we," "us," or "our") collects, uses, maintains, and discloses information collected from users ("User," "you," or "your") of the ReplyBuzz platform and associated services (collectively, the "Service"). This Policy applies to the Service and all products and services offered by ReplyBuzz. By accessing or using the Service, you acknowledge that you have read, understood, and agree to be bound by the terms of this Privacy Policy. If you do not agree with these terms, you must immediately discontinue use of the Service.
+                            This Privacy Policy (&quot;Policy&quot;) governs the manner in which ReplyBuzz (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) collects, uses, maintains, and discloses information collected from users (&quot;User,&quot; &quot;you,&quot; or &quot;your&quot;) of the ReplyBuzz platform and associated services (collectively, the &quot;Service&quot;). This Policy applies to the Service and all products and services offered by ReplyBuzz. By accessing or using the Service, you acknowledge that you have read, understood, and agree to be bound by the terms of this Privacy Policy. If you do not agree with these terms, you must immediately discontinue use of the Service.
                         </p>
                     </section>
 
@@ -47,19 +47,19 @@ export default function PrivacyPolicyPage() {
 
                         <h3 className="text-xl font-semibold mb-3 mt-6">2.2 Non-Personal Identification Information</h3>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            We may collect non-personal identification information about Users whenever they interact with our Service. Non-personal identification information may include the browser name, the type of computer or mobile device, technical information about Users' means of connection to our Service, such as the operating system, Internet service providers utilized, IP addresses, device identifiers, and other similar information. This data is collected through the use of cookies, web beacons, log files, and other tracking technologies.
+                            We may collect non-personal identification information about Users whenever they interact with our Service. Non-personal identification information may include the browser name, the type of computer or mobile device, technical information about Users&apos; means of connection to our Service, such as the operating system, Internet service providers utilized, IP addresses, device identifiers, and other similar information. This data is collected through the use of cookies, web beacons, log files, and other tracking technologies.
                         </p>
 
                         <h3 className="text-xl font-semibold mb-3 mt-6">2.3 Google Business Profile Data</h3>
                         <p className="text-muted-foreground leading-relaxed">
-                            When you connect your Google Business Profile to our Service, we collect and process data from your Google Business Profile, including but not limited to: business name, address, phone number, website URL, business hours, categories, reviews, ratings, posts, photos, and other publicly available information. We access this data through official Google APIs using OAuth 2.0 authentication. We do not store your Google account password. Access tokens are encrypted and stored securely in compliance with industry standards and Google's API Services User Data Policy.
+                            When you connect your Google Business Profile to our Service, we collect and process data from your Google Business Profile, including but not limited to: business name, address, phone number, website URL, business hours, categories, reviews, ratings, posts, photos, and other publicly available information. We access this data through official Google APIs using OAuth 2.0 authentication. We do not store your Google account password. Access tokens are encrypted and stored securely in compliance with industry standards and Google&apos;s API Services User Data Policy.
                         </p>
                     </section>
 
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">3. How We Use Collected Information</h2>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            ReplyBuzz may collect and use Users' personal information for the following purposes, which are necessary for the performance of the contract between you and ReplyBuzz, for compliance with legal obligations, and for our legitimate business interests:
+                            ReplyBuzz may collect and use Users&apos; personal information for the following purposes, which are necessary for the performance of the contract between you and ReplyBuzz, for compliance with legal obligations, and for our legitimate business interests:
                         </p>
                         <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                             <li><strong>To provide and maintain the Service:</strong> Including processing your requests, managing your account, and delivering the features and functionality of the Service.</li>
@@ -85,7 +85,7 @@ export default function PrivacyPolicyPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">5. Data Sharing and Disclosure</h2>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            We do not sell, trade, or rent Users' personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners, trusted affiliates, and advertisers for the purposes outlined above.
+                            We do not sell, trade, or rent Users&apos; personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners, trusted affiliates, and advertisers for the purposes outlined above.
                         </p>
                         <p className="text-muted-foreground leading-relaxed mb-4">
                             We may disclose your personal information to third parties in the following circumstances:
@@ -145,16 +145,16 @@ export default function PrivacyPolicyPage() {
                     </section>
 
                     <section className="mb-8">
-                        <h2 className="text-2xl font-semibold mb-4">10. Children's Privacy</h2>
+                        <h2 className="text-2xl font-semibold mb-4">10. Children&apos;s Privacy</h2>
                         <p className="text-muted-foreground leading-relaxed">
-                            Our Service is not directed to individuals under the age of 18 ("Children"). We do not knowingly collect personally identifiable information from Children. If you are a parent or guardian and you are aware that your Child has provided us with personal data, please contact us. If we become aware that we have collected personal data from Children without verification of parental consent, we will take steps to remove that information from our servers immediately. If we need to rely on consent as a legal basis for processing your information and your country requires consent from a parent, we may require your parent's consent before we collect and use that information.
+                            Our Service is not directed to individuals under the age of 18 (&quot;Children&quot;). We do not knowingly collect personally identifiable information from Children. If you are a parent or guardian and you are aware that your Child has provided us with personal data, please contact us. If we become aware that we have collected personal data from Children without verification of parental consent, we will take steps to remove that information from our servers immediately. If we need to rely on consent as a legal basis for processing your information and your country requires consent from a parent, we may require your parent&apos;s consent before we collect and use that information.
                         </p>
                     </section>
 
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">11. Cookies and Tracking Technologies</h2>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            Our Service uses "cookies" and similar tracking technologies to enhance user experience, analyze trends, administer the Service, track users' movements around the Service, and gather demographic information about our user base as a whole. A cookie is a small text file that is stored on your device for record-keeping purposes. We use both session cookies (which expire when you close your browser) and persistent cookies (which remain on your device until deleted or until they expire).
+                            Our Service uses &quot;cookies&quot; and similar tracking technologies to enhance user experience, analyze trends, administer the Service, track users&apos; movements around the Service, and gather demographic information about our user base as a whole. A cookie is a small text file that is stored on your device for record-keeping purposes. We use both session cookies (which expire when you close your browser) and persistent cookies (which remain on your device until deleted or until they expire).
                         </p>
                         <p className="text-muted-foreground leading-relaxed mb-4">
                             You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service. We use the following types of cookies:

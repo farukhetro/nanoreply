@@ -1,0 +1,237 @@
+﻿
+> replybuzz-frontend@0.1.0 build
+> next build
+
+npm : ΓÜá Warning: Next.js 
+inferred your workspace 
+root, but it may not be 
+correct.
+At line:1 char:1
++ npm run build 2>&1 | 
+Out-File -FilePath 
+build-error.txt -Encoding 
+utf ...
++ ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          
+    : NotSpecified: (ΓÜá W  
+  arning: Ne...not be cor   
+ rect.:String) [], Remot    
+eException
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 
+ We detected multiple 
+lockfiles and selected the 
+directory of C:\Users\User\p
+ackage-lock.json as the 
+root directory.
+ To silence this warning, 
+set `turbopack.root` in 
+your Next.js config, or 
+consider removing one of 
+the lockfiles if it's not 
+needed.
+   See https://nextjs.org/do
+cs/app/api-reference/config/
+next-config-js/turbopack#roo
+t-directory for more 
+information.
+ Detected additional 
+lockfiles: 
+   * C:\Users\User\OneDrive\
+Documents\TESTING\GOOGLE BUS
+INESS\nanoreply-frontend\pac
+kage-lock.json
+
+Γû▓ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+
+ΓÜá The "middleware" file 
+convention is deprecated. 
+Please use "proxy" instead. 
+Learn more: https://nextjs.o
+rg/docs/messages/middleware-
+to-proxy
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build 
+failed with 3 errors:
+./OneDrive/Documents/TESTING
+/GOOGLE BUSINESS/nanoreply-f
+rontend/src/app/dashboard/pa
+ge.tsx:13:10
+Ecmascript file had an error
+[0m [90m 11 |[39m } 
+[36mfrom[39m [32m"lucide-
+react"[39m[33m;[39m
+ [90m 12 |[39m 
+[36mimport[39m 
+[33mLink[39m 
+[36mfrom[39m [32m"next/li
+nk"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 
+13 |[39m [36mimport[39m 
+{ useEffect[33m,[39m 
+useState } [36mfrom[39m 
+[32m'react'[39m[33m;[39m
+ [90m    |[39m          [
+31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^
+[22m[39m
+ [90m 14 |[39m 
+[36mimport[39m { 
+useRouter } [36mfrom[39m 
+[32m'next/navigation'[39m[
+33m;[39m
+ [90m 15 |[39m
+ [90m 16 |[39m 
+[36mimport[39m { 
+[33mUser[39m } 
+[36mfrom[39m [32m'@supaba
+se/supabase-js'[39m[33m;[
+39m[0m
+
+You're importing a 
+component that needs 
+`useEffect`. This React 
+Hook only works in a Client 
+Component. To fix, mark the 
+file (or its parent) with 
+the `"use client"` 
+directive.
+
+ Learn more: https://nextjs.
+org/docs/app/api-reference/d
+irectives/use-client
+
+
+
+
+./OneDrive/Documents/TESTING
+/GOOGLE BUSINESS/nanoreply-f
+rontend/src/app/dashboard/pa
+ge.tsx:14:10
+Ecmascript file had an error
+[0m [90m 12 |[39m 
+[36mimport[39m 
+[33mLink[39m 
+[36mfrom[39m [32m"next/li
+nk"[39m[33m;[39m
+ [90m 13 |[39m 
+[36mimport[39m { 
+useEffect[33m,[39m 
+useState } [36mfrom[39m 
+[32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 
+14 |[39m [36mimport[39m 
+{ useRouter } 
+[36mfrom[39m [32m'next/na
+vigation'[39m[33m;[39m
+ [90m    |[39m          [
+31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[3
+9m[31m[1m^[22m[39m[31m
+[1m^[22m[39m[31m[1m^[22
+m[39m[31m[1m^[22m[39m[
+31m[1m^[22m[39m[31m[1m^
+[22m[39m
+ [90m 15 |[39m
+ [90m 16 |[39m 
+[36mimport[39m { 
+[33mUser[39m } 
+[36mfrom[39m [32m'@supaba
+se/supabase-js'[39m[33m;[
+39m
+ [90m 17 |[39m[0m
+
+You're importing a 
+component that needs 
+`useRouter`. This React 
+Hook only works in a Client 
+Component. To fix, mark the 
+file (or its parent) with 
+the `"use client"` 
+directive.
+
+ Learn more: https://nextjs.
+org/docs/app/api-reference/d
+irectives/use-client
+
+
+
+
+./OneDrive/Documents/TESTING
+/GOOGLE BUSINESS/nanoreply-f
+rontend/src/app/dashboard/pa
+ge.tsx:13:21
+Ecmascript file had an error
+[0m [90m 11 |[39m } 
+[36mfrom[39m [32m"lucide-
+react"[39m[33m;[39m
+ [90m 12 |[39m 
+[36mimport[39m 
+[33mLink[39m 
+[36mfrom[39m [32m"next/li
+nk"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 
+13 |[39m [36mimport[39m 
+{ useEffect[33m,[39m 
+useState } [36mfrom[39m 
+[32m'react'[39m[33m;[39m
+ [90m    |[39m            
+         [31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39
+m
+ [90m 14 |[39m 
+[36mimport[39m { 
+useRouter } [36mfrom[39m 
+[32m'next/navigation'[39m[
+33m;[39m
+ [90m 15 |[39m
+ [90m 16 |[39m 
+[36mimport[39m { 
+[33mUser[39m } 
+[36mfrom[39m [32m'@supaba
+se/supabase-js'[39m[33m;[
+39m[0m
+
+You're importing a 
+component that needs 
+`useState`. This React Hook 
+only works in a Client 
+Component. To fix, mark the 
+file (or its parent) with 
+the `"use client"` 
+directive.
+
+ Learn more: https://nextjs.
+org/docs/app/api-reference/d
+irectives/use-client
+
+
+
+
+    at <unknown> (./OneDrive
+/Documents/TESTING/GOOGLE BU
+SINESS/nanoreply-frontend/sr
+c/app/dashboard/page.tsx:13:
+10)
+    at <unknown> (./OneDrive
+/Documents/TESTING/GOOGLE BU
+SINESS/nanoreply-frontend/sr
+c/app/dashboard/page.tsx:14:
+10)
+    at <unknown> (./OneDrive
+/Documents/TESTING/GOOGLE BU
+SINESS/nanoreply-frontend/sr
+c/app/dashboard/page.tsx:13:
+21)
