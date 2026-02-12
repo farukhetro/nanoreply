@@ -51,7 +51,6 @@ export default function DashboardLayout({
     };
 
     return (
-    return (
         <div className="h-screen bg-muted/20 flex overflow-hidden">
             {/* Mobile Sidebar Overlay */}
             {sidebarOpen && (
