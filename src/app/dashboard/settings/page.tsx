@@ -12,6 +12,7 @@ import {
     BrainCircuit,
     Link as LinkIcon
 } from "lucide-react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function SettingsPage() {
