@@ -5,11 +5,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn, StaggerContainer } from "@/components/ui/fade-in";
 
-import { CheckCircle2, Sparkles } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function UpgradePage() {
-    const handleUpgrade = (planName: string) => {
-        console.log(`Upgrading to ${planName}...`);
+    const router = useRouter();
+
+    const handleUpgrade = (planName: string, price: string) => {
+        if (price === "Contact Us") {
+            window.location.href = "mailto:sales@nanoreply.com";
+            return;
+        }
+        router.push(`/dashboard/payment?plan=${encodeURIComponent(planName)}&price=${encodeURIComponent(price)}`);
     };
 
     return (
@@ -79,7 +85,7 @@ export default function UpgradePage() {
                                     className="w-full"
                                     variant={plan.popular ? "default" : "outline"}
                                     disabled={plan.current}
-                                    onClick={() => handleUpgrade(plan.name)}
+                                    onClick={() => handleUpgrade(plan.name, plan.price)}
                                 >
                                     {plan.current ? "Current Plan" : plan.cta}
                                 </Button>
