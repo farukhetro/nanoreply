@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Sparkles, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { Logo } from "@/components/ui/logo";
 
 export default function TermsPage() {
     return (
@@ -14,8 +15,7 @@ export default function TermsPage() {
                             </Button>
                         </Link>
                         <div className="flex items-center gap-2">
-                            <Sparkles className="h-6 w-6 text-primary" />
-                            <span className="text-xl font-bold gradient-text">NanoReply</span>
+                            <Logo className="h-8 w-8" />
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@ export default function TermsPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">1. Acceptance of Terms</h2>
                         <p className="text-muted-foreground leading-relaxed">
-                            These Terms of Service ("Terms," "Agreement") constitute a legally binding agreement between you ("User," "you," or "your") and NanoReply ("Company," "we," "us," or "our") governing your access to and use of the NanoReply platform, website, applications, and all related services (collectively, the "Service"). By accessing, browsing, or using the Service, you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy, which is incorporated herein by reference. If you do not agree to these Terms, you must immediately cease all use of the Service. We reserve the right to modify these Terms at any time, and such modifications shall be effective immediately upon posting. Your continued use of the Service following the posting of revised Terms constitutes your acceptance of such changes.
+                            These Terms of Service ("Terms," "Agreement") constitute a legally binding agreement between you ("User," "you," or "your") and ReplyBuzz ("Company," "we," "us," or "our") governing your access to and use of the ReplyBuzz platform, website, applications, and all related services (collectively, the "Service"). By accessing, browsing, or using the Service, you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy, which is incorporated herein by reference. If you do not agree to these Terms, you must immediately cease all use of the Service. We reserve the right to modify these Terms at any time, and such modifications shall be effective immediately upon posting. Your continued use of the Service following the posting of revised Terms constitutes your acceptance of such changes.
                         </p>
                     </section>
 
@@ -49,7 +49,7 @@ export default function TermsPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">3. Description of Service</h2>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            NanoReply provides an AI-powered automation platform that connects to your Google Business Profile to perform the following functions: (a) generate and publish automated responses to customer reviews; (b) create and publish SEO-optimized blog posts; (c) generate and publish AI-created images; and (d) provide analytics and reporting related to these activities. The Service utilizes artificial intelligence, machine learning, and natural language processing technologies to generate content.
+                            ReplyBuzz provides an AI-powered automation platform that connects to your Google Business Profile to perform the following functions: (a) generate and publish automated responses to customer reviews; (b) create and publish SEO-optimized blog posts; (c) generate and publish AI-created images; and (d) provide analytics and reporting related to these activities. The Service utilizes artificial intelligence, machine learning, and natural language processing technologies to generate content.
                         </p>
                         <p className="text-muted-foreground leading-relaxed">
                             We reserve the right to modify, suspend, or discontinue the Service (or any part thereof) at any time, with or without notice, for any reason, including but not limited to maintenance, upgrades, or changes in business strategy. We shall not be liable to you or any third party for any modification, suspension, or discontinuation of the Service.
@@ -72,7 +72,7 @@ export default function TermsPage() {
                             The Service utilizes artificial intelligence to generate content, including review responses, blog posts, and images. While we employ advanced technologies and quality control measures, AI-generated content may contain errors, inaccuracies, or inappropriate material. You acknowledge and agree that: (a) all AI-generated content is provided "as is" without any warranties of any kind; (b) you are solely responsible for reviewing, editing, and approving all AI-generated content before it is published; (c) you bear full legal responsibility for all content published through the Service, whether generated by AI or otherwise; and (d) we disclaim all liability for any damages, losses, or consequences arising from the use of AI-generated content.
                         </p>
                         <p className="text-muted-foreground leading-relaxed">
-                            You agree to indemnify, defend, and hold harmless NanoReply, its affiliates, officers, directors, employees, agents, and licensors from and against any and all claims, liabilities, damages, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising from or relating to your use of AI-generated content or any violation of these Terms by you.
+                            You agree to indemnify, defend, and hold harmless ReplyBuzz, its affiliates, officers, directors, employees, agents, and licensors from and against any and all claims, liabilities, damages, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising from or relating to your use of AI-generated content or any violation of these Terms by you.
                         </p>
                     </section>
 
@@ -92,7 +92,7 @@ export default function TermsPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">7. Intellectual Property Rights</h2>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            The Service and all content, features, and functionality thereof, including but not limited to all information, software, text, displays, images, video, audio, design, presentation, selection, and arrangement, are owned by NanoReply, its licensors, or other providers of such material and are protected by copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws. These Terms grant you a limited, non-exclusive, non-transferable, non-sublicensable, revocable license to access and use the Service for your internal business purposes in accordance with these Terms.
+                            The Service and all content, features, and functionality thereof, including but not limited to all information, software, text, displays, images, video, audio, design, presentation, selection, and arrangement, are owned by ReplyBuzz, its licensors, or other providers of such material and are protected by copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws. These Terms grant you a limited, non-exclusive, non-transferable, non-sublicensable, revocable license to access and use the Service for your internal business purposes in accordance with these Terms.
                         </p>
                         <p className="text-muted-foreground leading-relaxed">
                             You may not: (a) copy, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on our Service, except as incidental to normal use of the Service; (b) remove, alter, or obscure any copyright, trademark, or other proprietary rights notices from the Service; (c) reverse engineer, decompile, disassemble, or otherwise attempt to derive the source code of the Service; or (d) use the Service to develop competing products or services.
@@ -122,7 +122,7 @@ export default function TermsPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">10. Limitation of Liability</h2>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL NANOREPLY, ITS AFFILIATES, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, OR LICENSORS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, ARISING OUT OF OR RELATING TO YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICE, WHETHER BASED ON WARRANTY, CONTRACT, TORT (INCLUDING NEGLIGENCE), STATUTE, OR ANY OTHER LEGAL THEORY, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+                            TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL REPLYBUZZ, ITS AFFILIATES, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, OR LICENSORS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, ARISING OUT OF OR RELATING TO YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICE, WHETHER BASED ON WARRANTY, CONTRACT, TORT (INCLUDING NEGLIGENCE), STATUTE, OR ANY OTHER LEGAL THEORY, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
                         </p>
                         <p className="text-muted-foreground leading-relaxed">
                             OUR TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING OUT OF OR RELATING TO THESE TERMS OR THE SERVICE SHALL NOT EXCEED THE AMOUNT YOU PAID TO US FOR THE SERVICE DURING THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO THE LIABILITY, OR ONE HUNDRED DOLLARS ($100), WHICHEVER IS GREATER. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF CERTAIN WARRANTIES OR DAMAGES, SO SOME OF THE ABOVE LIMITATIONS MAY NOT APPLY TO YOU.
@@ -132,7 +132,7 @@ export default function TermsPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">11. Indemnification</h2>
                         <p className="text-muted-foreground leading-relaxed">
-                            You agree to indemnify, defend, and hold harmless NanoReply, its affiliates, officers, directors, employees, agents, licensors, and suppliers from and against any and all claims, liabilities, damages, losses, costs, expenses, or fees (including reasonable attorneys' fees and court costs) arising out of or relating to: (a) your use of the Service; (b) your User Content; (c) your violation of these Terms; (d) your violation of any rights of another party, including any intellectual property rights; (e) your violation of any applicable laws or regulations; or (f) any AI-generated content published through your account. We reserve the right to assume the exclusive defense and control of any matter subject to indemnification by you, in which event you will cooperate with us in asserting any available defenses.
+                            You agree to indemnify, defend, and hold harmless ReplyBuzz, its affiliates, officers, directors, employees, agents, licensors, and suppliers from and against any and all claims, liabilities, damages, losses, costs, expenses, or fees (including reasonable attorneys' fees and court costs) arising out of or relating to: (a) your use of the Service; (b) your User Content; (c) your violation of these Terms; (d) your violation of any rights of another party, including any intellectual property rights; (e) your violation of any applicable laws or regulations; or (f) any AI-generated content published through your account. We reserve the right to assume the exclusive defense and control of any matter subject to indemnification by you, in which event you will cooperate with us in asserting any available defenses.
                         </p>
                     </section>
 
@@ -159,7 +159,7 @@ export default function TermsPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">14. Miscellaneous</h2>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            <strong>Entire Agreement:</strong> These Terms, together with our Privacy Policy and any other policies or agreements referenced herein, constitute the entire agreement between you and NanoReply regarding the Service and supersede all prior or contemporaneous understandings and agreements, whether written or oral.
+                            <strong>Entire Agreement:</strong> These Terms, together with our Privacy Policy and any other policies or agreements referenced herein, constitute the entire agreement between you and ReplyBuzz regarding the Service and supersede all prior or contemporaneous understandings and agreements, whether written or oral.
                         </p>
                         <p className="text-muted-foreground leading-relaxed mb-4">
                             <strong>Severability:</strong> If any provision of these Terms is found to be invalid, illegal, or unenforceable, the remaining provisions shall continue in full force and effect.
@@ -178,8 +178,8 @@ export default function TermsPage() {
                             If you have any questions, concerns, or disputes regarding these Terms, please contact us at:
                         </p>
                         <div className="bg-muted/30 p-6 rounded-lg">
-                            <p className="font-semibold mb-2">NanoReply</p>
-                            <p className="text-muted-foreground">Email: legal@nanoreply.com</p>
+                            <p className="font-semibold mb-2">ReplyBuzz</p>
+                            <p className="text-muted-foreground">Email: legal@replybuzz.com</p>
                             <p className="text-muted-foreground">Address: [Company Address]</p>
                             <p className="text-muted-foreground">Phone: [Company Phone]</p>
                         </div>
@@ -187,7 +187,7 @@ export default function TermsPage() {
 
                     <div className="mt-12 pt-8 border-t border-border">
                         <p className="text-sm text-muted-foreground text-center">
-                            By using the NanoReply Service, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
+                            By using the ReplyBuzz Service, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
                         </p>
                     </div>
                 </div>

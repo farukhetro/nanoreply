@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Sparkles, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { Logo } from "@/components/ui/logo";
 
 export default function PrivacyPolicyPage() {
     return (
@@ -15,8 +16,7 @@ export default function PrivacyPolicyPage() {
                             </Button>
                         </Link>
                         <div className="flex items-center gap-2">
-                            <Sparkles className="h-6 w-6 text-primary" />
-                            <span className="text-xl font-bold gradient-text">NanoReply</span>
+                            <Logo className="h-8 w-8" />
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@ export default function PrivacyPolicyPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
                         <p className="text-muted-foreground leading-relaxed">
-                            This Privacy Policy ("Policy") governs the manner in which NanoReply ("Company," "we," "us," or "our") collects, uses, maintains, and discloses information collected from users ("User," "you," or "your") of the NanoReply platform and associated services (collectively, the "Service"). This Policy applies to the Service and all products and services offered by NanoReply. By accessing or using the Service, you acknowledge that you have read, understood, and agree to be bound by the terms of this Privacy Policy. If you do not agree with these terms, you must immediately discontinue use of the Service.
+                            This Privacy Policy ("Policy") governs the manner in which ReplyBuzz ("Company," "we," "us," or "our") collects, uses, maintains, and discloses information collected from users ("User," "you," or "your") of the ReplyBuzz platform and associated services (collectively, the "Service"). This Policy applies to the Service and all products and services offered by ReplyBuzz. By accessing or using the Service, you acknowledge that you have read, understood, and agree to be bound by the terms of this Privacy Policy. If you do not agree with these terms, you must immediately discontinue use of the Service.
                         </p>
                     </section>
 
@@ -59,7 +59,7 @@ export default function PrivacyPolicyPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">3. How We Use Collected Information</h2>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            NanoReply may collect and use Users' personal information for the following purposes, which are necessary for the performance of the contract between you and NanoReply, for compliance with legal obligations, and for our legitimate business interests:
+                            ReplyBuzz may collect and use Users' personal information for the following purposes, which are necessary for the performance of the contract between you and ReplyBuzz, for compliance with legal obligations, and for our legitimate business interests:
                         </p>
                         <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                             <li><strong>To provide and maintain the Service:</strong> Including processing your requests, managing your account, and delivering the features and functionality of the Service.</li>
@@ -108,7 +108,7 @@ export default function PrivacyPolicyPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">7. Your Data Protection Rights (GDPR Compliance)</h2>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            If you are a resident of the European Economic Area (EEA), you have certain data protection rights under the General Data Protection Regulation (GDPR). NanoReply aims to take reasonable steps to allow you to correct, amend, delete, or limit the use of your personal information. You have the following rights:
+                            If you are a resident of the European Economic Area (EEA), you have certain data protection rights under the General Data Protection Regulation (GDPR). ReplyBuzz aims to take reasonable steps to allow you to correct, amend, delete, or limit the use of your personal information. You have the following rights:
                         </p>
                         <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                             <li><strong>Right to Access:</strong> You have the right to request copies of your personal data. We may charge a reasonable fee for this service if your request is manifestly unfounded or excessive.</li>
@@ -130,7 +130,7 @@ export default function PrivacyPolicyPage() {
                             Our Service utilizes artificial intelligence and machine learning technologies to generate content, including but not limited to review responses, blog posts, and images. While we strive to ensure that AI-generated content is accurate, appropriate, and compliant with applicable guidelines and policies, we cannot guarantee the accuracy, completeness, reliability, or suitability of such content for any particular purpose.
                         </p>
                         <p className="text-muted-foreground leading-relaxed mb-4">
-                            Users are solely responsible for reviewing, editing, and approving all AI-generated content before it is published to their Google Business Profile or any other platform. NanoReply disclaims all liability for any damages, losses, or consequences arising from the use of AI-generated content, including but not limited to reputational harm, legal liability, or violations of third-party rights. By using our Service, you acknowledge and agree that you bear full responsibility for all content published through the Service, whether generated by AI or otherwise.
+                            Users are solely responsible for reviewing, editing, and approving all AI-generated content before it is published to their Google Business Profile or any other platform. ReplyBuzz disclaims all liability for any damages, losses, or consequences arising from the use of AI-generated content, including but not limited to reputational harm, legal liability, or violations of third-party rights. By using our Service, you acknowledge and agree that you bear full responsibility for all content published through the Service, whether generated by AI or otherwise.
                         </p>
                         <p className="text-muted-foreground leading-relaxed">
                             We reserve the right to monitor, review, and remove AI-generated content that violates our Terms of Service, applicable laws, or third-party platform policies. However, we are under no obligation to do so and assume no liability for failure to monitor or remove such content.
@@ -170,7 +170,7 @@ export default function PrivacyPolicyPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-semibold mb-4">12. Changes to This Privacy Policy</h2>
                         <p className="text-muted-foreground leading-relaxed">
-                            NanoReply has the discretion to update this Privacy Policy at any time. When we do, we will revise the updated date at the top of this page and send you an email notification if the changes are material. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect. You acknowledge and agree that it is your responsibility to review this Privacy Policy periodically and become aware of modifications. Your continued use of the Service after any changes to this Privacy Policy will constitute your acknowledgment of the modifications and your consent to abide and be bound by the modified Privacy Policy.
+                            ReplyBuzz has the discretion to update this Privacy Policy at any time. When we do, we will revise the updated date at the top of this page and send you an email notification if the changes are material. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect. You acknowledge and agree that it is your responsibility to review this Privacy Policy periodically and become aware of modifications. Your continued use of the Service after any changes to this Privacy Policy will constitute your acknowledgment of the modifications and your consent to abide and be bound by the modified Privacy Policy.
                         </p>
                     </section>
 
@@ -187,8 +187,8 @@ export default function PrivacyPolicyPage() {
                             If you have any questions, concerns, or requests regarding this Privacy Policy, the practices of this Service, or your dealings with this Service, please contact us at:
                         </p>
                         <div className="bg-muted/30 p-6 rounded-lg">
-                            <p className="font-semibold mb-2">NanoReply</p>
-                            <p className="text-muted-foreground">Email: privacy@nanoreply.com</p>
+                            <p className="font-semibold mb-2">ReplyBuzz</p>
+                            <p className="text-muted-foreground">Email: privacy@replybuzz.com</p>
                             <p className="text-muted-foreground">Address: [Company Address]</p>
                             <p className="text-muted-foreground">Phone: [Company Phone]</p>
                         </div>
@@ -196,7 +196,7 @@ export default function PrivacyPolicyPage() {
 
                     <div className="mt-12 pt-8 border-t border-border">
                         <p className="text-sm text-muted-foreground text-center">
-                            This Privacy Policy was last updated on January 1, 2026. By using the NanoReply Service, you signify your acceptance of this Privacy Policy. If you do not agree to this Privacy Policy, please do not use our Service.
+                            This Privacy Policy was last updated on January 1, 2026. By using the ReplyBuzz Service, you signify your acceptance of this Privacy Policy. If you do not agree to this Privacy Policy, please do not use our Service.
                         </p>
                     </div>
                 </div>
