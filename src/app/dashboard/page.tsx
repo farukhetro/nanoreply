@@ -24,25 +24,32 @@ export default function DashboardPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Authenticate
-        const u = localStorage.getItem('user');
-        if (!u) {
-            router.push('/login');
-            return;
-        }
-        setUser(JSON.parse(u));
+        const fetchUser = async () => {
+            const { createClient } = await import('@/lib/supabase/client');
+            const supabase = createClient();
+            const { data: { user } } = await supabase.auth.getUser();
 
-        // Simulate data fetch
-        setTimeout(() => {
-            setStats({ blogPosts: 15, aiPhotos: 13, repliesToday: 20, repliesMonth: 250 });
-            setLoading(false);
-        }, 500);
+            if (!user) {
+                router.push('/login');
+                return;
+            }
+            setUser({
+                name: user.user_metadata?.name || user.user_metadata?.full_name || user.email?.split('@')[0],
+                email: user.email,
+                image: user.user_metadata?.avatar_url || user.user_metadata?.picture
+            });
+
+            // Simulate data fetch for stats (can be connected to DB later)
+            setTimeout(() => {
+                setStats({ blogPosts: 15, aiPhotos: 13, repliesToday: 20, repliesMonth: 250 });
+                setLoading(false);
+            }, 500);
+        };
+
+        fetchUser();
     }, [router]);
 
-    // Handle authentication redirect - prevent flash of content
-    if (typeof window !== 'undefined' && !localStorage.getItem('user')) {
-        return null;
-    }
+
 
     // Optional: Show loading state or skeleton
     if (loading && !user) return <div className="p-8">Loading dashboard...</div>;

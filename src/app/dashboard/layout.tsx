@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
     LayoutDashboard,
@@ -29,7 +29,26 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     const pathname = usePathname();
+    const router = useRouter(); // Import this
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [user, setUser] = useState<any>(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const { createClient } = await import('@/lib/supabase/client');
+            const supabase = createClient();
+            const { data: { user } } = await supabase.auth.getUser();
+            setUser(user);
+        };
+        fetchUser();
+    }, []);
+
+    const handleSignOut = async () => {
+        const { createClient } = await import('@/lib/supabase/client');
+        const supabase = createClient();
+        await supabase.auth.signOut();
+        router.push('/login');
+    };
 
     return (
         <div className="min-h-screen bg-muted/20 flex">
@@ -92,12 +111,14 @@ export default function DashboardLayout({
                         </Link>
                     </div>
 
-                    <Link href="/login">
-                        <Button variant="ghost" className="w-full justify-start gap-3 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20">
-                            <LogOut className="h-4 w-4" />
-                            Sign Out
-                        </Button>
-                    </Link>
+                    <Button
+                        variant="ghost"
+                        className="w-full justify-start gap-3 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
+                        onClick={handleSignOut}
+                    >
+                        <LogOut className="h-4 w-4" />
+                        Sign Out
+                    </Button>
                 </div>
             </aside>
 
@@ -129,10 +150,14 @@ export default function DashboardLayout({
                     <div className="ml-auto flex items-center gap-4">
                         <div className="flex items-center gap-3">
                             <div className="text-right hidden sm:block">
-                                <p className="text-sm font-medium">User</p>
+                                <p className="text-sm font-medium">{user?.user_metadata?.name || user?.email?.split('@')[0] || 'User'}</p>
                             </div>
-                            <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
-                                <User className="h-5 w-5 text-primary" />
+                            <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20 overflow-hidden">
+                                {user?.user_metadata?.avatar_url ? (
+                                    <img src={user.user_metadata.avatar_url} alt="User" className="h-full w-full object-cover" />
+                                ) : (
+                                    <User className="h-5 w-5 text-primary" />
+                                )}
                             </div>
                         </div>
                     </div>
