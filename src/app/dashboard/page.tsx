@@ -64,10 +64,12 @@ export default function DashboardPage() {
                     </p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <Button size="sm">
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Connect Business
-                    </Button>
+                    <Link href="/dashboard/settings">
+                        <Button size="sm">
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Connect Business
+                        </Button>
+                    </Link>
                 </div>
             </div>
 
