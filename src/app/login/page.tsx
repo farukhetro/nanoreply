@@ -14,25 +14,30 @@ export default function LoginPage() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleGoogleLogin = () => {
+    const handleGoogleLogin = async () => {
         setIsLoading(true);
-        // Mock Google Login
-        setTimeout(() => {
-            const mockUser = {
-                id: 'google-user-123',
-                name: 'Demo User',
-                email: 'demo@gmail.com',
-                image: null
-            };
+        try {
+            const { createClient } = await import('@/lib/supabase/client');
+            const supabase = createClient();
 
-            localStorage.setItem('user', JSON.stringify(mockUser));
-            localStorage.setItem('token', 'fake-google-jwt');
-            document.cookie = "token=fake-google-jwt; path=/; max-age=86400; SameSite=Lax";
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    redirectTo: `${location.origin}/auth/callback`,
+                },
+            });
 
+            if (error) {
+                console.error(error);
+                toast("Failed to sign in with Google", "error");
+                setIsLoading(false);
+            }
+            // User will be redirected, no need to set loading false or router push here immediately
+        } catch (err) {
+            console.error(err);
+            toast("An error occurred", "error");
             setIsLoading(false);
-            toast("Successfully signed in with Google!", "success");
-            router.push("/dashboard");
-        }, 1500);
+        }
     };
 
     return (

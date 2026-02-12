@@ -31,18 +31,12 @@ export default function SettingsPage() {
     });
 
     useEffect(() => {
-        // Auth Check
-        if (!localStorage.getItem('user')) {
-            router.push('/login');
-            return;
-        }
-
         // Load settings
         const saved = localStorage.getItem('settings');
         if (saved) {
             setSettings(JSON.parse(saved));
         }
-    }, [router]);
+    }, []);
 
 
     const handleSave = () => {

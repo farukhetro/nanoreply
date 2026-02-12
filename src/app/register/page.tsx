@@ -14,25 +14,34 @@ export default function RegisterPage() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleGoogleRegister = () => {
+    const handleGoogleRegister = async () => {
         setIsLoading(true);
-        // Mock Google Registration
-        setTimeout(() => {
-            const mockUser = {
-                id: 'google-user-123',
-                name: 'Demo User',
-                email: 'demo@gmail.com',
-                image: null
-            };
+        try {
+            // Dynamic import to avoid SSR issues if any, though standard import is fine too but client.ts is safe.
+            const { createClient } = await import('@/lib/supabase/client');
+            const supabase = createClient();
 
-            localStorage.setItem('user', JSON.stringify(mockUser));
-            localStorage.setItem('token', 'fake-google-jwt');
-            document.cookie = "token=fake-google-jwt; path=/; max-age=86400; SameSite=Lax";
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    redirectTo: `${location.origin}/auth/callback`,
+                    queryParams: {
+                        access_type: 'offline',
+                        prompt: 'consent',
+                    },
+                },
+            });
 
+            if (error) {
+                console.error(error);
+                toast("Failed to register with Google", "error");
+                setIsLoading(false);
+            }
+        } catch (err) {
+            console.error(err);
+            toast("An error occurred", "error");
             setIsLoading(false);
-            toast("Account created successfully!", "success");
-            router.push("/dashboard");
-        }, 1500);
+        }
     };
 
     return (
