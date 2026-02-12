@@ -88,16 +88,21 @@ git init
 git add .
 git commit -m "Initial commit - Production ready"
 git branch -M main
-git remote add origin https://github.com/yourusername/nanoreply-frontend.git
+git remote add origin https://github.com/farukhetro/replybuzz.git
 git push -u origin main
 ```
 
 #### Step 2: Connect to Vercel
 1. Go to [vercel.com](https://vercel.com)
 2. Click "Import Project"
-3. Select your GitHub repository
+3. Select your GitHub repository (`replybuzz`)
 4. Add environment variables
-5. Click "Deploy"
+5. Click "Deploy" (Your site will be live at `https://advadapp.vercel.app/` or similar)
+
+**IMPORTANT:** After deployment, update your **Supabase Auth Redirect URL**:
+1. Go to Supabase Dashboard > Authentication > URL Configuration
+2. Add `https://advadapp.vercel.app/` to "Redirect URLs"
+3. Update `NEXT_PUBLIC_BASE_URL` in Vercel to `https://advadapp.vercel.app`
 
 ---
 

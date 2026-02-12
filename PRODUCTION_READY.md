@@ -92,8 +92,8 @@ netlify deploy --prod
 ```
 
 ### Option 3: GitHub + Auto-Deploy
-1. Push to GitHub
-2. Connect to Vercel/Netlify
+1. Push to https://github.com/farukhetro/replybuzz
+2. Connect to Vercel/Netlify (Use: https://advadapp.vercel.app/)
 3. Auto-deploy on push
 
 See `DEPLOYMENT_GUIDE.md` for detailed instructions.

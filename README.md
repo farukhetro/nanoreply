@@ -55,8 +55,8 @@ Automate your Google Business Profile with AI. Get 24/7 review replies, daily SE
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/nanoreply-frontend.git
-cd nanoreply-frontend
+git clone https://github.com/farukhetro/replybuzz.git
+cd replybuzz
 ```
 
 2. **Install dependencies**
