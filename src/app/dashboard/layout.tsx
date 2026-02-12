@@ -51,7 +51,8 @@ export default function DashboardLayout({
     };
 
     return (
-        <div className="min-h-screen bg-muted/20 flex">
+    return (
+        <div className="h-screen bg-muted/20 flex overflow-hidden">
             {/* Mobile Sidebar Overlay */}
             {sidebarOpen && (
                 <div
@@ -63,11 +64,11 @@ export default function DashboardLayout({
             {/* Sidebar */}
             <aside
                 className={cn(
-                    "fixed top-0 left-0 z-50 h-screen w-64 bg-background border-r border-border transition-transform duration-300 lg:translate-x-0 lg:static",
+                    "fixed top-0 left-0 z-50 h-full w-64 bg-background border-r border-border transition-transform duration-300 lg:translate-x-0 lg:static flex flex-col",
                     sidebarOpen ? "translate-x-0" : "-translate-x-full"
                 )}
             >
-                <div className="h-16 flex items-center px-6 border-b border-border">
+                <div className="h-16 flex items-center px-6 border-b border-border shrink-0">
                     <Link href="/dashboard" className="flex items-center gap-2">
                         <Logo className="h-8 w-8" />
                     </Link>
@@ -79,7 +80,7 @@ export default function DashboardLayout({
                     </button>
                 </div>
 
-                <div className="p-4 space-y-2">
+                <div className="p-4 space-y-2 flex-1 overflow-y-auto">
                     {navigation.map((item) => {
                         const Icon = item.icon;
                         const isActive = pathname === item.href;
@@ -102,7 +103,7 @@ export default function DashboardLayout({
                     })}
                 </div>
 
-                <div className="absolute bottom-4 left-4 right-4 space-y-2">
+                <div className="p-4 space-y-2 border-t border-border bg-background shrink-0">
                     <div className="p-4 rounded-lg bg-muted/50 border border-border">
                         <Link href="/dashboard/upgrade" className="block">
                             <Button size="sm" className="w-full text-xs h-8 shadow-sm">
@@ -123,9 +124,9 @@ export default function DashboardLayout({
             </aside>
 
             {/* Main Content */}
-            <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
+            <div className="flex-1 flex flex-col h-full overflow-hidden">
                 {/* Header */}
-                <header className="h-16 border-b border-border bg-background/50 backdrop-blur-sm px-6 flex items-center justify-between sticky top-0 z-30">
+                <header className="h-16 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6 flex items-center justify-between shrink-0 z-30">
                     <div className="flex items-center gap-4">
                         <button
                             className="lg:hidden p-2 -ml-2 rounded-md hover:bg-muted"
@@ -164,8 +165,8 @@ export default function DashboardLayout({
                 </header>
 
                 {/* Page Content */}
-                <main className="flex-1 overflow-auto p-6 lg:p-8">
-                    <div className="max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <main className="flex-1 overflow-y-auto p-6 lg:p-8 scroll-smooth">
+                    <div className="max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 pb-10">
                         {children}
                     </div>
                 </main>
