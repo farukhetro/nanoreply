@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={cn(inter.variable, "antialiased min-h-screen font-sans bg-background text-foreground")}>
-        <ThemeProvider defaultTheme="system" storageKey="nanoreply-ui-theme">
+        <ThemeProvider defaultTheme="system" storageKey="replybuzz-ui-theme">
           <ToastProvider>{children}</ToastProvider>
         </ThemeProvider>
       </body>
