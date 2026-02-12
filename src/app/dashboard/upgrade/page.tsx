@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn, StaggerContainer } from "@/components/ui/fade-in";
 
+import { CheckCircle2, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function UpgradePage() {
