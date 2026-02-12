@@ -15,12 +15,15 @@ import {
 } from "lucide-react";
 import { countries } from "@/lib/countries";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SettingsPage() {
     const { toast } = useToast();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+
+    const searchParams = useSearchParams();
+    const isConnected = searchParams.get('connected') === 'true';
 
     // Default state
     const [settings, setSettings] = useState({
@@ -31,7 +34,8 @@ export default function SettingsPage() {
         country: "",
         keywords: "",
         tone: "professional",
-        autoPublish: false
+        autoPublish: false,
+        isConnected: false
     });
 
     useEffect(() => {
@@ -40,7 +44,19 @@ export default function SettingsPage() {
         if (saved) {
             setSettings(JSON.parse(saved));
         }
-    }, []);
+
+        // Handle connection callback
+        if (isConnected) {
+            setSettings(prev => {
+                const newSettings = { ...prev, isConnected: true, businessName: "Nano Banana Shop", location: "123 Banana St, Fruitville" };
+                localStorage.setItem('settings', JSON.stringify(newSettings));
+                return newSettings;
+            });
+            toast("Google Business Profile connected!", "success");
+            // Clear the param from URL without refresh
+            router.replace('/dashboard/settings');
+        }
+    }, [isConnected, router, toast]);
 
 
     const handleSave = () => {
@@ -62,7 +78,7 @@ export default function SettingsPage() {
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
                 options: {
-                    redirectTo: `${location.origin}/auth/callback?next=/dashboard/settings`,
+                    redirectTo: `${location.origin}/auth/callback?next=${encodeURIComponent('/dashboard/settings?connected=true')}`,
                     scopes: 'https://www.googleapis.com/auth/business.manage',
                     queryParams: {
                         access_type: 'offline', // vital for refresh tokens
@@ -109,20 +125,27 @@ export default function SettingsPage() {
                         <CardContent className="space-y-4 pt-4">
                             <div className="flex items-center justify-between p-4 bg-background/50 rounded-lg border border-border">
                                 <div className="flex items-center gap-4">
-                                    <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
-                                        <Building2 className="h-5 w-5 text-gray-400" />
+                                    <div className={`h-10 w-10 rounded-full flex items-center justify-center shrink-0 ${settings.isConnected ? 'bg-green-100' : 'bg-gray-100'}`}>
+                                        <Building2 className={`h-5 w-5 ${settings.isConnected ? 'text-green-600' : 'text-gray-400'}`} />
                                     </div>
                                     <div>
-                                        <p className="font-medium">No Business Connected</p>
-                                        <p className="text-xs text-muted-foreground">Connect to start automating</p>
+                                        <p className="font-medium">{settings.isConnected ? (settings.businessName || "Connected Business") : "No Business Connected"}</p>
+                                        <p className="text-xs text-muted-foreground">{settings.isConnected ? "Syncing data automatically" : "Connect to start automating"}</p>
                                     </div>
                                 </div>
-                                <Badge variant="outline" className="bg-gray-50 text-gray-500">
-                                    Offline
+                                <Badge variant="outline" className={settings.isConnected ? "bg-green-50 text-green-600 border-green-200" : "bg-gray-50 text-gray-500"}>
+                                    {settings.isConnected ? "Active" : "Offline"}
                                 </Badge>
                             </div>
-                            <Button variant="outline" className="w-full" onClick={handleConnect}>
-                                Manage Connection
+                            <Button
+                                variant={settings.isConnected ? "outline" : "default"}
+                                className="w-full"
+                                onClick={settings.isConnected ? () => {
+                                    setSettings(prev => ({ ...prev, isConnected: false, businessName: "" }));
+                                    localStorage.setItem('settings', JSON.stringify({ ...settings, isConnected: false, businessName: "" }));
+                                } : handleConnect}
+                            >
+                                {settings.isConnected ? "Disconnect Business" : "Manage Connection"}
                             </Button>
                         </CardContent>
                     </Card>
