@@ -12,18 +12,13 @@ import {
     BrainCircuit,
     Link as LinkIcon
 } from "lucide-react";
-import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function SettingsPage() {
     const { toast } = useToast();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
-    const searchParams = useSearchParams();
-    const isConnected = searchParams.get('connected') === 'true';
-
-    // Default state
     const [settings, setSettings] = useState({
         businessName: "",
         category: "",
@@ -37,22 +32,24 @@ export default function SettingsPage() {
         // Load settings
         const saved = localStorage.getItem('settings');
         if (saved) {
-            setSettings(JSON.parse(saved));
+            const parsed = JSON.parse(saved);
+            // Fix: Remove mock data if present
+            if (parsed.businessName === "Nano Banana Shop") {
+                const resetSettings = {
+                    businessName: "",
+                    category: "",
+                    keywords: "",
+                    tone: "professional",
+                    autoPublish: false,
+                    isConnected: false
+                };
+                setSettings(resetSettings);
+                localStorage.setItem('settings', JSON.stringify(resetSettings));
+            } else {
+                setSettings(parsed);
+            }
         }
-
-        // Handle connection callback
-        if (isConnected) {
-            setSettings(prev => {
-                const newSettings = { ...prev, isConnected: true, businessName: "Nano Banana Shop" };
-                localStorage.setItem('settings', JSON.stringify(newSettings));
-                return newSettings;
-            });
-            toast("Google Business Profile connected!", "success");
-            // Clear the param from URL without refresh
-            router.replace('/dashboard/settings');
-        }
-    }, [isConnected, router, toast]);
-
+    }, []);
 
     const handleSave = () => {
         setLoading(true);
@@ -73,7 +70,7 @@ export default function SettingsPage() {
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
                 options: {
-                    redirectTo: `${location.origin}/auth/callback?next=${encodeURIComponent('/dashboard/settings?connected=true')}`,
+                    redirectTo: `${location.origin}/auth/callback?next=${encodeURIComponent('/dashboard/settings')}`,
                     scopes: 'https://www.googleapis.com/auth/business.manage',
                     queryParams: {
                         access_type: 'offline', // vital for refresh tokens
