@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
             },
             body: JSON.stringify({
                 code,
-                redirect_uri: 'https://advadapp.shop/auth/callback'
+                redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI || 'https://replybuzz.online/auth/callback'
             }),
         });
 
