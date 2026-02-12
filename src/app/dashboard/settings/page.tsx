@@ -13,6 +13,7 @@ import {
     BrainCircuit,
     Link as LinkIcon
 } from "lucide-react";
+import { countries } from "@/lib/countries";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
@@ -174,17 +175,21 @@ export default function SettingsPage() {
                                     <select
                                         className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                                         value={settings.country}
-                                        onChange={(e) => handleChange('country', e.target.value)}
+                                        onChange={(e) => {
+                                            const selectedCountry = countries.find(c => c.name === e.target.value);
+                                            handleChange('country', e.target.value);
+                                            // Optional: auto-fill phone prefix if empty
+                                            // if (selectedCountry && !settings.phone) {
+                                            //     handleChange('phone', selectedCountry.dial_code + " ");
+                                            // }
+                                        }}
                                     >
                                         <option value="" disabled>Select a country</option>
-                                        <option value="United States">United States</option>
-                                        <option value="United Kingdom">United Kingdom</option>
-                                        <option value="Canada">Canada</option>
-                                        <option value="Australia">Australia</option>
-                                        <option value="India">India</option>
-                                        <option value="Germany">Germany</option>
-                                        <option value="France">France</option>
-                                        <option value="Other">Other</option>
+                                        {countries.map((c) => (
+                                            <option key={c.code} value={c.name}>
+                                                {c.flag} {c.name} ({c.dial_code})
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
                                 <div className="space-y-2">
