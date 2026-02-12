@@ -8,12 +8,10 @@ import { FadeIn, StaggerContainer } from "@/components/ui/fade-in";
 import { useToast } from "@/components/providers/toast-provider";
 import {
     Building2,
-    MapPin,
     Settings as SettingsIcon,
     BrainCircuit,
     Link as LinkIcon
 } from "lucide-react";
-import { countries } from "@/lib/countries";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -29,9 +27,6 @@ export default function SettingsPage() {
     const [settings, setSettings] = useState({
         businessName: "",
         category: "",
-        location: "",
-        phone: "",
-        country: "",
         keywords: "",
         tone: "professional",
         autoPublish: false,
@@ -48,7 +43,7 @@ export default function SettingsPage() {
         // Handle connection callback
         if (isConnected) {
             setSettings(prev => {
-                const newSettings = { ...prev, isConnected: true, businessName: "Nano Banana Shop", location: "123 Banana St, Fruitville" };
+                const newSettings = { ...prev, isConnected: true, businessName: "Nano Banana Shop" };
                 localStorage.setItem('settings', JSON.stringify(newSettings));
                 return newSettings;
             });
@@ -164,135 +159,92 @@ export default function SettingsPage() {
                             </div>
                         </CardHeader>
                         <CardContent className="space-y-4">
-                            <div className="grid md:grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">Business Name</label>
-                                    <Input
-                                        value={settings.businessName}
-                                        onChange={(e) => handleChange('businessName', e.target.value)}
-                                        placeholder="Enter business name"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">Category</label>
-                                    <Input
-                                        value={settings.category}
-                                        onChange={(e) => handleChange('category', e.target.value)}
-                                        placeholder="e.g. Dental Clinic, Marketing Agency, Restaurant"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">Location</label>
-                                    <div className="relative">
-                                        <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                                        <Input
-                                            className="pl-9"
-                                            value={settings.location}
-                                            onChange={(e) => handleChange('location', e.target.value)}
-                                            placeholder="Business address"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">Country</label>
-                                    <select
-                                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                        value={settings.country}
-                                        onChange={(e) => {
-                                            const selectedCountry = countries.find(c => c.name === e.target.value);
-                                            handleChange('country', e.target.value);
-                                            // Optional: auto-fill phone prefix if empty
-                                            // if (selectedCountry && !settings.phone) {
-                                            //     handleChange('phone', selectedCountry.dial_code + " ");
-                                            // }
-                                        }}
-                                    >
-                                        <option value="" disabled>Select a country</option>
-                                        {countries.map((c) => (
-                                            <option key={c.code} value={c.name}>
-                                                {c.flag} {c.name} ({c.dial_code})
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">Phone</label>
-                                    <Input
-                                        value={settings.phone}
-                                        onChange={(e) => handleChange('phone', e.target.value)}
-                                        placeholder="Business phone"
-                                    />
-                                </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium">Business Name</label>
+                                <Input
+                                    value={settings.businessName}
+                                    onChange={(e) => handleChange('businessName', e.target.value)}
+                                    placeholder="Enter business name"
+                                />
                             </div>
-                        </CardContent>
-                    </Card>
-                </FadeIn>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium">Category</label>
+                                <Input
+                                    value={settings.category}
+                                    onChange={(e) => handleChange('category', e.target.value)}
+                                    placeholder="e.g. Dental Clinic, Marketing Agency, Restaurant"
+                                />
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
+            </FadeIn>
 
-                {/* AI Preferences */}
-                <FadeIn delay={0.3}>
-                    <Card>
-                        <CardHeader>
-                            <div className="flex items-center gap-2">
-                                <BrainCircuit className="h-5 w-5 text-muted-foreground" />
-                                <div className="space-y-1">
-                                    <CardTitle>AI Configuration</CardTitle>
-                                    <CardDescription>Customize how the AI interacts with your customers.</CardDescription>
-                                </div>
+            {/* AI Preferences */}
+            <FadeIn delay={0.3}>
+                <Card>
+                    <CardHeader>
+                        <div className="flex items-center gap-2">
+                            <BrainCircuit className="h-5 w-5 text-muted-foreground" />
+                            <div className="space-y-1">
+                                <CardTitle>AI Configuration</CardTitle>
+                                <CardDescription>Customize how the AI interacts with your customers.</CardDescription>
                             </div>
-                        </CardHeader>
-                        <CardContent className="space-y-6">
-                            <div className="space-y-3">
-                                <label className="text-sm font-medium">Reply Tone</label>
-                                <div className="grid grid-cols-3 gap-4">
-                                    {["Professional", "Friendly", "Premium"].map((t) => (
-                                        <div
-                                            key={t}
-                                            className={`
+                        </div>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                        <div className="space-y-3">
+                            <label className="text-sm font-medium">Reply Tone</label>
+                            <div className="grid grid-cols-3 gap-4">
+                                {["Professional", "Friendly", "Premium"].map((t) => (
+                                    <div
+                                        key={t}
+                                        className={`
                         cursor-pointer rounded-lg border p-4 text-center transition-all hover:bg-muted/50
                         ${settings.tone === t.toLowerCase() ? "border-primary ring-1 ring-primary bg-primary/5" : "border-input"}
                       `}
-                                            onClick={() => handleChange('tone', t.toLowerCase())}
-                                        >
-                                            <span className="text-sm font-medium">{t}</span>
-                                        </div>
-                                    ))}
-                                </div>
+                                        onClick={() => handleChange('tone', t.toLowerCase())}
+                                    >
+                                        <span className="text-sm font-medium">{t}</span>
+                                    </div>
+                                ))}
                             </div>
+                        </div>
 
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">SEO Keywords</label>
-                                <textarea
-                                    className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                    value={settings.keywords}
-                                    onChange={(e) => handleChange('keywords', e.target.value)}
-                                    placeholder="Enter keywords separated by commas"
-                                />
-                                <p className="text-xs text-muted-foreground">
-                                    AI will prioritize these keywords in blog posts.
-                                </p>
-                            </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium">SEO Keywords</label>
+                            <textarea
+                                className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                value={settings.keywords}
+                                onChange={(e) => handleChange('keywords', e.target.value)}
+                                placeholder="Enter keywords separated by commas"
+                            />
+                            <p className="text-xs text-muted-foreground">
+                                AI will prioritize these keywords in blog posts.
+                            </p>
+                        </div>
 
-                            <div className="flex items-center justify-between p-4 rounded-lg border border-input bg-muted/20">
-                                <div className="space-y-0.5">
-                                    <label className="text-sm font-medium">Auto-Publish Content</label>
-                                    <p className="text-xs text-muted-foreground">Automatically post AI-generated content daily.</p>
-                                </div>
-                                <div
-                                    className={`h-6 w-11 rounded-full relative cursor-pointer transition-colors ${settings.autoPublish ? 'bg-primary' : 'bg-gray-200'}`}
-                                    onClick={() => handleChange('autoPublish', !settings.autoPublish)}
-                                >
-                                    <div className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${settings.autoPublish ? 'right-1' : 'left-1'}`} />
-                                </div>
+                        <div className="flex items-center justify-between p-4 rounded-lg border border-input bg-muted/20">
+                            <div className="space-y-0.5">
+                                <label className="text-sm font-medium">Auto-Publish Content</label>
+                                <p className="text-xs text-muted-foreground">Automatically post AI-generated content daily.</p>
                             </div>
-                        </CardContent>
-                        <CardFooter>
-                            <Button className="ml-auto" onClick={handleSave} disabled={loading}>
-                                {loading ? "Saving..." : "Save Changes"}
-                            </Button>
-                        </CardFooter>
-                    </Card>
-                </FadeIn>
-            </StaggerContainer>
-        </div>
+                            <div
+                                className={`h-6 w-11 rounded-full relative cursor-pointer transition-colors ${settings.autoPublish ? 'bg-primary' : 'bg-gray-200'}`}
+                                onClick={() => handleChange('autoPublish', !settings.autoPublish)}
+                            >
+                                <div className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${settings.autoPublish ? 'right-1' : 'left-1'}`} />
+                            </div>
+                        </div>
+                    </CardContent>
+                    <CardFooter>
+                        <Button className="ml-auto" onClick={handleSave} disabled={loading}>
+                            {loading ? "Saving..." : "Save Changes"}
+                        </Button>
+                    </CardFooter>
+                </Card>
+            </FadeIn>
+        </StaggerContainer>
+        </div >
     );
 }
