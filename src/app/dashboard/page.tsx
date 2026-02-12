@@ -14,17 +14,49 @@ import {
     ExternalLink
 } from "lucide-react";
 import Link from "next/link";
-import GbpConnect from "@/components/GbpConnect";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function DashboardPage() {
+    const router = useRouter();
+    const [user, setUser] = useState<any>(null);
+    const [stats, setStats] = useState({ blogPosts: 0, aiPhotos: 0, repliesToday: 0, repliesMonth: 0 });
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // Authenticate
+        const u = localStorage.getItem('user');
+        if (!u) {
+            router.push('/login');
+            return;
+        }
+        setUser(JSON.parse(u));
+
+        // Simulate data fetch
+        setTimeout(() => {
+            setStats({ blogPosts: 15, aiPhotos: 13, repliesToday: 20, repliesMonth: 250 });
+            setLoading(false);
+        }, 500);
+    }, [router]);
+
+    // Handle authentication redirect - prevent flash of content
+    if (typeof window !== 'undefined' && !localStorage.getItem('user')) {
+        return null;
+    }
+
+    // Optional: Show loading state or skeleton
+    if (loading && !user) return <div className="p-8">Loading dashboard...</div>;
+
     return (
         <div className="space-y-8">
             {/* Header Section */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+                    <h1 className="text-3xl font-bold tracking-tight">
+                        Hello, {user?.name || user?.email?.split('@')[0] || 'User'}
+                    </h1>
                     <p className="text-muted-foreground mt-1">
-                        Welcome back! Connect your business to get started.
+                        Here's what's happening with your business today.
                     </p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -45,10 +77,11 @@ export default function DashboardPage() {
                     </CardHeader>
                     <CardContent>
                         <div className="mt-2 flex items-center gap-2">
-                            <span className="text-2xl font-bold">0</span>
+                            <span className="text-2xl font-bold">{stats.blogPosts}</span>
+                            {stats.blogPosts > 0 && <span className="text-xs text-green-600 bg-green-100 px-1.5 py-0.5 rounded-full">+2 this week</span>}
                         </div>
                         <p className="text-xs text-muted-foreground mt-1">
-                            Connect business to schedule posts.
+                            {stats.blogPosts > 0 ? "Scheduled and published." : "Connect business to schedule posts."}
                         </p>
                     </CardContent>
                 </Card>
@@ -61,10 +94,11 @@ export default function DashboardPage() {
                     </CardHeader>
                     <CardContent>
                         <div className="mt-2 flex items-center gap-2">
-                            <span className="text-2xl font-bold">0</span>
+                            <span className="text-2xl font-bold">{stats.aiPhotos}</span>
+                            {stats.aiPhotos > 0 && <span className="text-xs text-blue-600 bg-blue-100 px-1.5 py-0.5 rounded-full">Active</span>}
                         </div>
                         <p className="text-xs text-muted-foreground mt-1">
-                            No photos generated yet.
+                            {stats.aiPhotos > 0 ? "Generated for social media." : "No photos generated yet."}
                         </p>
                     </CardContent>
                 </Card>
@@ -77,7 +111,8 @@ export default function DashboardPage() {
                     </CardHeader>
                     <CardContent>
                         <div className="mt-2 flex items-center gap-2">
-                            <span className="text-2xl font-bold">0</span>
+                            <span className="text-2xl font-bold">{stats.repliesToday}</span>
+                            <span className="text-xs text-muted-foreground">/ {stats.repliesMonth} total</span>
                         </div>
                         <p className="text-xs text-muted-foreground mt-1">
                             Replied today.
@@ -96,16 +131,43 @@ export default function DashboardPage() {
                             <CardDescription>Real-time updates from your AI agent.</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
-                                <div className="p-4 rounded-full bg-muted/50">
-                                    <Clock className="h-8 w-8 text-muted-foreground" />
-                                </div>
-                                <div>
-                                    <p className="text-sm font-medium">No activity yet</p>
-                                    <p className="text-sm text-muted-foreground mt-1">
-                                        Connect your business to start automating.
-                                    </p>
-                                </div>
+                            <div className="flex flex-col space-y-4">
+                                {loading ? (
+                                    <div className="text-center py-8">Loading activity...</div>
+                                ) : stats.repliesToday > 0 ? (
+                                    <>
+                                        <div className="flex items-start gap-4 p-3 bg-muted/20 rounded-lg">
+                                            <div className="p-2 bg-green-100 text-green-600 rounded-full mt-1">
+                                                <MessageSquare className="h-4 w-4" />
+                                            </div>
+                                            <div>
+                                                <p className="text-sm font-medium">Replied to a review from Sarah J.</p>
+                                                <p className="text-xs text-muted-foreground">2 hours ago • 5 stars</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-4 p-3 bg-muted/20 rounded-lg">
+                                            <div className="p-2 bg-blue-100 text-blue-600 rounded-full mt-1">
+                                                <FileText className="h-4 w-4" />
+                                            </div>
+                                            <div>
+                                                <p className="text-sm font-medium">Published weekly blog post</p>
+                                                <p className="text-xs text-muted-foreground">5 hours ago • "Top 5 Dental Tips"</p>
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
+                                        <div className="p-4 rounded-full bg-muted/50">
+                                            <Clock className="h-8 w-8 text-muted-foreground" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-medium">No activity yet</p>
+                                            <p className="text-sm text-muted-foreground mt-1">
+                                                Connect your business to start automating.
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </CardContent>
                     </Card>

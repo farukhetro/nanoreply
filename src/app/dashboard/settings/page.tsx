@@ -13,17 +13,43 @@ import {
     BrainCircuit,
     Link as LinkIcon
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SettingsPage() {
     const { toast } = useToast();
+    const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [tone, setTone] = useState("professional");
+
+    // Default state
+    const [settings, setSettings] = useState({
+        businessName: "The Dental Studio",
+        category: "dental",
+        keywords: "dentist, teeth cleaning, dental implants, emergency dentist, local dentist",
+        tone: "professional",
+        autoPublish: true
+    });
+
+    useEffect(() => {
+        // Auth Check
+        if (!localStorage.getItem('user')) {
+            router.push('/login');
+            return;
+        }
+
+        // Load settings
+        const saved = localStorage.getItem('settings');
+        if (saved) {
+            setSettings(JSON.parse(saved));
+        }
+    }, [router]);
+
 
     const handleSave = () => {
         setLoading(true);
         // Mock API call
         setTimeout(() => {
+            localStorage.setItem('settings', JSON.stringify(settings));
             setLoading(false);
             toast("Settings saved successfully!", "success");
         }, 1000);
@@ -31,6 +57,10 @@ export default function SettingsPage() {
 
     const handleConnect = () => {
         toast("Redirecting to Google Business Profile...", "info");
+    };
+
+    const handleChange = (field: string, value: any) => {
+        setSettings(prev => ({ ...prev, [field]: value }));
     };
 
     return (
@@ -95,13 +125,18 @@ export default function SettingsPage() {
                             <div className="grid md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium">Business Name</label>
-                                    <Input defaultValue="The Dental Studio" placeholder="Enter business name" />
+                                    <Input
+                                        value={settings.businessName}
+                                        onChange={(e) => handleChange('businessName', e.target.value)}
+                                        placeholder="Enter business name"
+                                    />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium">Category</label>
                                     <select
                                         className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                        defaultValue="dental"
+                                        value={settings.category}
+                                        onChange={(e) => handleChange('category', e.target.value)}
                                     >
                                         <option value="dental">Dental Clinic</option>
                                         <option value="restaurant">Restaurant</option>
@@ -147,9 +182,9 @@ export default function SettingsPage() {
                                             key={t}
                                             className={`
                         cursor-pointer rounded-lg border p-4 text-center transition-all hover:bg-muted/50
-                        ${tone === t.toLowerCase() ? "border-primary ring-1 ring-primary bg-primary/5" : "border-input"}
+                        ${settings.tone === t.toLowerCase() ? "border-primary ring-1 ring-primary bg-primary/5" : "border-input"}
                       `}
-                                            onClick={() => setTone(t.toLowerCase())}
+                                            onClick={() => handleChange('tone', t.toLowerCase())}
                                         >
                                             <span className="text-sm font-medium">{t}</span>
                                         </div>
@@ -161,7 +196,8 @@ export default function SettingsPage() {
                                 <label className="text-sm font-medium">SEO Keywords</label>
                                 <textarea
                                     className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                    defaultValue="dentist, teeth cleaning, dental implants, emergency dentist, local dentist"
+                                    value={settings.keywords}
+                                    onChange={(e) => handleChange('keywords', e.target.value)}
                                     placeholder="Enter keywords separated by commas"
                                 />
                                 <p className="text-xs text-muted-foreground">
@@ -174,8 +210,11 @@ export default function SettingsPage() {
                                     <label className="text-sm font-medium">Auto-Publish Content</label>
                                     <p className="text-xs text-muted-foreground">Automatically post AI-generated content daily.</p>
                                 </div>
-                                <div className="h-6 w-11 rounded-full bg-primary relative cursor-pointer">
-                                    <div className="absolute right-1 top-1 h-4 w-4 rounded-full bg-white shadow-sm" />
+                                <div
+                                    className={`h-6 w-11 rounded-full relative cursor-pointer transition-colors ${settings.autoPublish ? 'bg-primary' : 'bg-gray-200'}`}
+                                    onClick={() => handleChange('autoPublish', !settings.autoPublish)}
+                                >
+                                    <div className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${settings.autoPublish ? 'right-1' : 'left-1'}`} />
                                 </div>
                             </div>
                         </CardContent>
