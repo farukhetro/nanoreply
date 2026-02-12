@@ -54,7 +54,12 @@ export default function PricingPage() {
                         const verifyRes = await fetch('/api/razorpay/verify', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ ...response, plan }),
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature,
+                                plan
+                            }),
                         });
 
                         const verifyData = await verifyRes.json();

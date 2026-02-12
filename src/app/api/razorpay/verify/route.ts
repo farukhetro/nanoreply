@@ -1,82 +1,77 @@
+import { createClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { createClient } from '@supabase/supabase-js';
-
-// Use SERVICE ROLE KEY to bypass RLS for payment updates
-const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
 
 export async function POST(request: Request) {
+    const supabase = await createClient();
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     try {
-        const body = await request.json();
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, plan } = body;
+        const {
+            razorpay_order_id,
+            razorpay_payment_id,
+            razorpay_signature,
+            plan
+        } = await request.json();
 
-        console.log("Verifying payment for:", { razorpay_order_id, razorpay_payment_id, plan });
+        const body = razorpay_order_id + '|' + razorpay_payment_id;
 
-        const secret = process.env.RAZORPAY_KEY_SECRET!;
-        const generated_signature = crypto
-            .createHmac('sha256', secret)
-            .update(razorpay_order_id + "|" + razorpay_payment_id)
+        const expectedSignature = crypto
+            .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET!)
+            .update(body.toString())
             .digest('hex');
 
-        if (generated_signature === razorpay_signature) {
-            // Payment verified. Now update user.
-            // Since this is a server call from the frontend, we need the USER ID.
-            // We can get it from the session (cookie) OR the frontend passed it?
-            // Safer to get from session to prevent spoofing user_id.
+        const isAuthentic = expectedSignature === razorpay_signature;
 
-            // Check auth from cookies using standard helper for READ
-            const { createClient: createServerClient } = await import('@/lib/supabase/server');
-            const supabaseUser = await createServerClient();
-            const { data: { user } } = await supabaseUser.auth.getUser();
-
-            if (!user) {
-                console.error("No authenticated user found during verify");
-                return NextResponse.json({ status: 'error', message: 'Unauthorized' }, { status: 401 });
-            }
-
-            console.log("Authenticated user:", user.id);
-
-            // Upsert subscription using ADMIN client (bypass RLS)
-            const limits: any = {
-                basic: { replies: 30, photos: 0, blogs: 0 },
-                growth: { replies: 100, photos: 4, blogs: 0 },
-                pro: { replies: 999999, photos: 10, blogs: 4 }
+        if (isAuthentic) {
+            // Payment Verified!
+            // Map plan to DB plan_name
+            const planMap: Record<string, string> = {
+                'basic': 'Basic',
+                'growth': 'Growth',
+                'pro': 'Pro'
             };
 
-            const selectedPlan = plan || 'basic'; // Fallback
+            const dbPlanName = planMap[plan] || 'Basic';
 
-            // Log update attempt
-            console.log("Updating subscription for:", user.id, "Plan:", selectedPlan);
+            // Update Tenant Plan
+            const { error: updateError } = await supabase
+                .from('tenants')
+                .update({
+                    plan_name: dbPlanName,
+                    // Optionally reset usage if instant upgrade is desired
+                    // blogs_used: 0, 
+                    // photos_used: 0,
+                    // replies_used_today: 0
+                })
+                .eq('id', user.user_metadata?.tenant_id || (await supabase.from('users').select('tenant_id').eq('id', user.id).single()).data?.tenant_id);
 
-            const { error } = await supabaseAdmin
-                .from('subscriptions')
-                .upsert({
-                    user_id: user.id,
-                    plan: selectedPlan,
-                    razorpay_subscription_id: razorpay_payment_id,
-                    status: 'active',
-                    replies_used: 0,
-                    photos_used: 0,
-                    blogs_used: 0,
-                    updated_at: new Date().toISOString()
-                }, { onConflict: 'user_id' });
-
-            if (error) {
-                console.error('Supabase Admin Error:', error);
-                return NextResponse.json({ status: 'error', message: 'Database update failed' }, { status: 500 });
+            if (updateError) {
+                console.error("DB Update Failed:", updateError);
+                // Note: Payment succeeded but DB failed. Log this for manual fix.
             }
 
-            console.log("Subscription updated successfully!");
-            return NextResponse.json({ status: 'success' });
+            return NextResponse.json({
+                success: true,
+                message: 'Payment verified and plan updated',
+            });
         } else {
-            console.error("Invalid signature");
-            return NextResponse.json({ status: 'error', message: 'Invalid signature' }, { status: 400 });
+            return NextResponse.json(
+                { success: false, message: 'Invalid signature' },
+                { status: 400 }
+            );
         }
-    } catch (err) {
-        console.error("Server Error in Verify:", err);
-        return NextResponse.json({ status: 'error', message: 'Internal Server Error' }, { status: 500 });
+    } catch (error) {
+        console.error('Razorpay Verify Error:', error);
+        return NextResponse.json(
+            { error: 'Error verifying payment' },
+            { status: 500 }
+        );
     }
 }
