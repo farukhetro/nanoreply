@@ -13,11 +13,17 @@ export default function ForgotPasswordPage() {
     const [submitted, setSubmitted] = useState(false);
     const { toast } = useToast();
 
+    const [loading, setLoading] = useState(false);
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Password reset requested for:", email);
-        setSubmitted(true);
-        toast("Reset link sent! Check your email.", "success");
+        setLoading(true);
+        // Mock API call
+        setTimeout(() => {
+            setLoading(false);
+            setSubmitted(true);
+            toast("Reset link sent! Check your email.", "success");
+        }, 1000);
     };
 
     return (
@@ -53,8 +59,8 @@ export default function ForgotPasswordPage() {
                                     required
                                 />
                             </div>
-                            <Button type="submit" className="w-full">
-                                Send Reset Link
+                            <Button type="submit" className="w-full" disabled={loading}>
+                                {loading ? "Sending..." : "Send Reset Link"}
                             </Button>
                         </form>
                     ) : (
