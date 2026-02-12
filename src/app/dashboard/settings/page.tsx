@@ -25,6 +25,9 @@ export default function SettingsPage() {
     const [settings, setSettings] = useState({
         businessName: "",
         category: "",
+        location: "",
+        phone: "",
+        country: "",
         keywords: "",
         tone: "professional",
         autoPublish: false
@@ -158,12 +161,39 @@ export default function SettingsPage() {
                                     <label className="text-sm font-medium">Location</label>
                                     <div className="relative">
                                         <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                                        <Input className="pl-9" defaultValue="123 Main St, New York, NY" placeholder="Business address" />
+                                        <Input
+                                            className="pl-9"
+                                            value={settings.location}
+                                            onChange={(e) => handleChange('location', e.target.value)}
+                                            placeholder="Business address"
+                                        />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
+                                    <label className="text-sm font-medium">Country</label>
+                                    <select
+                                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                        value={settings.country}
+                                        onChange={(e) => handleChange('country', e.target.value)}
+                                    >
+                                        <option value="" disabled>Select a country</option>
+                                        <option value="United States">United States</option>
+                                        <option value="United Kingdom">United Kingdom</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="India">India</option>
+                                        <option value="Germany">Germany</option>
+                                        <option value="France">France</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
                                     <label className="text-sm font-medium">Phone</label>
-                                    <Input defaultValue="+1 (555) 000-0000" placeholder="Business phone" />
+                                    <Input
+                                        value={settings.phone}
+                                        onChange={(e) => handleChange('phone', e.target.value)}
+                                        placeholder="Business phone"
+                                    />
                                 </div>
                             </div>
                         </CardContent>
