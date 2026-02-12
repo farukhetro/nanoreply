@@ -27,10 +27,8 @@ const nextConfig: NextConfig = {
             key: 'X-DNS-Prefetch-Control',
             value: 'on'
           },
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload'
-          },
+          // HSTS removed for localhost compatibility. 
+          // In production (Vercel/Netlify), this is usually handled at the edge automatically.
           {
             key: 'X-Frame-Options',
             value: 'SAMEORIGIN'
