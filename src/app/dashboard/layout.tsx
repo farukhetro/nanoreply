@@ -33,6 +33,8 @@ export default function DashboardLayout({
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [user, setUser] = useState<any>(null);
 
+    const [businessStatus, setBusinessStatus] = useState({ name: "", isConnected: false });
+
     useEffect(() => {
         const fetchUser = async () => {
             const { createClient } = await import('@/lib/supabase/client');
@@ -41,6 +43,24 @@ export default function DashboardLayout({
             setUser(user);
         };
         fetchUser();
+
+        // Initial check
+        const checkSettings = () => {
+            const saved = localStorage.getItem('settings');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (parsed.isConnected) {
+                    setBusinessStatus({ name: parsed.businessName || "My Business", isConnected: true });
+                } else {
+                    setBusinessStatus({ name: "", isConnected: false });
+                }
+            }
+        };
+        checkSettings();
+
+        // Poll for changes (simple way to sync across pages in same session without complex context)
+        const interval = setInterval(checkSettings, 1000);
+        return () => clearInterval(interval);
     }, []);
 
     const handleSignOut = async () => {
@@ -135,16 +155,22 @@ export default function DashboardLayout({
                         </button>
 
                         {/* Business Status Indicator */}
-                        <div className="hidden md:flex items-center gap-3 px-3 py-1.5 rounded-full bg-muted/30 border border-border">
-                            <div className="flex items-center gap-2 border-r border-border pr-3">
-                                <Building2 className="h-4 w-4 text-muted-foreground" />
-                                <span className="text-sm font-medium">Select Business</span>
+                        <Link href="/dashboard/settings">
+                            <div className={`hidden md:flex items-center gap-3 px-3 py-1.5 rounded-full border transition-colors ${businessStatus.isConnected ? 'bg-green-50 border-green-200' : 'bg-muted/30 border-border'}`}>
+                                <div className={`flex items-center gap-2 border-r pr-3 ${businessStatus.isConnected ? 'border-green-200' : 'border-border'}`}>
+                                    <Building2 className={`h-4 w-4 ${businessStatus.isConnected ? 'text-green-600' : 'text-muted-foreground'}`} />
+                                    <span className={`text-sm font-medium ${businessStatus.isConnected ? 'text-green-900' : ''}`}>
+                                        {businessStatus.isConnected ? businessStatus.name : "Select Business"}
+                                    </span>
+                                </div>
+                                <div className="flex items-center gap-1.5 pl-1">
+                                    <div className={`h-2 w-2 rounded-full ${businessStatus.isConnected ? 'bg-green-500 animate-pulse' : 'bg-gray-300'}`} />
+                                    <span className={`text-xs font-medium ${businessStatus.isConnected ? 'text-green-700' : 'text-muted-foreground'}`}>
+                                        {businessStatus.isConnected ? "Active" : "Not Connected"}
+                                    </span>
+                                </div>
                             </div>
-                            <div className="flex items-center gap-1.5 pl-1">
-                                <div className="h-2 w-2 rounded-full bg-gray-300" />
-                                <span className="text-xs font-medium text-muted-foreground">Not Connected</span>
-                            </div>
-                        </div>
+                        </Link>
                     </div>
 
                     <div className="ml-auto flex items-center gap-4">
