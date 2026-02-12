@@ -45,7 +45,7 @@ export const Logo = ({ className = "h-8 w-8", withText = true }: { className?: s
                 </defs>
             </svg>
             {withText && (
-                <span className="font-bold text-xl tracking-tight text-gray-900 dark:text-gray-100">
+                <span className="font-bold text-xl tracking-tight text-foreground">
                     ReplyBuzz
                 </span>
             )}
