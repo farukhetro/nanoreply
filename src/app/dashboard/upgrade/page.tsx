@@ -110,8 +110,8 @@ const plans = [
         name: "Basic",
         price: "₹299",
         popular: false,
-        current: true,
-        cta: "Downgrade",
+        current: false,
+        cta: "Choose Basic",
         features: [
             "15 blog posts/month",
             "15 AI photos/month",
