@@ -4,14 +4,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn, StaggerContainer } from "@/components/ui/fade-in";
-import { useToast } from "@/components/providers/toast-provider";
+
 import { CheckCircle2, Sparkles } from "lucide-react";
 
 export default function UpgradePage() {
-    const { toast } = useToast();
-
     const handleUpgrade = (planName: string) => {
-        toast(`Upgrading to ${planName}... Redirecting to payment.`, "success");
+        console.log(`Upgrading to ${planName}...`);
     };
 
     return (
