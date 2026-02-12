@@ -23,11 +23,11 @@ export default function SettingsPage() {
 
     // Default state
     const [settings, setSettings] = useState({
-        businessName: "The Dental Studio",
-        category: "dental",
-        keywords: "dentist, teeth cleaning, dental implants, emergency dentist, local dentist",
+        businessName: "",
+        category: "",
+        keywords: "",
         tone: "professional",
-        autoPublish: true
+        autoPublish: false
     });
 
     useEffect(() => {
@@ -105,16 +105,16 @@ export default function SettingsPage() {
                         <CardContent className="space-y-4 pt-4">
                             <div className="flex items-center justify-between p-4 bg-background/50 rounded-lg border border-border">
                                 <div className="flex items-center gap-4">
-                                    <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-                                        <span className="text-blue-600 font-bold">G</span>
+                                    <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
+                                        <Building2 className="h-5 w-5 text-gray-400" />
                                     </div>
                                     <div>
-                                        <p className="font-medium">My Business</p>
-                                        <p className="text-xs text-muted-foreground">Connected</p>
+                                        <p className="font-medium">No Business Connected</p>
+                                        <p className="text-xs text-muted-foreground">Connect to start automating</p>
                                     </div>
                                 </div>
-                                <Badge variant="secondary" className="bg-green-100 text-green-700 hover:bg-green-100 border-green-200">
-                                    Active
+                                <Badge variant="outline" className="bg-gray-50 text-gray-500">
+                                    Offline
                                 </Badge>
                             </div>
                             <Button variant="outline" className="w-full" onClick={handleConnect}>
