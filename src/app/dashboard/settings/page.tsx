@@ -159,92 +159,93 @@ export default function SettingsPage() {
                             </div>
                         </CardHeader>
                         <CardContent className="space-y-4">
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">Business Name</label>
-                                <Input
-                                    value={settings.businessName}
-                                    onChange={(e) => handleChange('businessName', e.target.value)}
-                                    placeholder="Enter business name"
-                                />
+                            <div className="grid md:grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Business Name</label>
+                                    <Input
+                                        value={settings.businessName}
+                                        onChange={(e) => handleChange('businessName', e.target.value)}
+                                        placeholder="Enter business name"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Category</label>
+                                    <Input
+                                        value={settings.category}
+                                        onChange={(e) => handleChange('category', e.target.value)}
+                                        placeholder="e.g. Dental Clinic, Marketing Agency, Restaurant"
+                                    />
+                                </div>
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">Category</label>
-                                <Input
-                                    value={settings.category}
-                                    onChange={(e) => handleChange('category', e.target.value)}
-                                    placeholder="e.g. Dental Clinic, Marketing Agency, Restaurant"
-                                />
-                            </div>
-                        </div>
-                    </CardContent>
-                </Card>
-            </FadeIn>
+                        </CardContent>
+                    </Card>
+                </FadeIn>
 
-            {/* AI Preferences */}
-            <FadeIn delay={0.3}>
-                <Card>
-                    <CardHeader>
-                        <div className="flex items-center gap-2">
-                            <BrainCircuit className="h-5 w-5 text-muted-foreground" />
-                            <div className="space-y-1">
-                                <CardTitle>AI Configuration</CardTitle>
-                                <CardDescription>Customize how the AI interacts with your customers.</CardDescription>
+                {/* AI Preferences */}
+                <FadeIn delay={0.3}>
+                    <Card>
+                        <CardHeader>
+                            <div className="flex items-center gap-2">
+                                <BrainCircuit className="h-5 w-5 text-muted-foreground" />
+                                <div className="space-y-1">
+                                    <CardTitle>AI Configuration</CardTitle>
+                                    <CardDescription>Customize how the AI interacts with your customers.</CardDescription>
+                                </div>
                             </div>
-                        </div>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                        <div className="space-y-3">
-                            <label className="text-sm font-medium">Reply Tone</label>
-                            <div className="grid grid-cols-3 gap-4">
-                                {["Professional", "Friendly", "Premium"].map((t) => (
-                                    <div
-                                        key={t}
-                                        className={`
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                            <div className="space-y-3">
+                                <label className="text-sm font-medium">Reply Tone</label>
+                                <div className="grid grid-cols-3 gap-4">
+                                    {["Professional", "Friendly", "Premium"].map((t) => (
+                                        <div
+                                            key={t}
+                                            className={`
                         cursor-pointer rounded-lg border p-4 text-center transition-all hover:bg-muted/50
                         ${settings.tone === t.toLowerCase() ? "border-primary ring-1 ring-primary bg-primary/5" : "border-input"}
                       `}
-                                        onClick={() => handleChange('tone', t.toLowerCase())}
-                                    >
-                                        <span className="text-sm font-medium">{t}</span>
-                                    </div>
-                                ))}
+                                            onClick={() => handleChange('tone', t.toLowerCase())}
+                                        >
+                                            <span className="text-sm font-medium">{t}</span>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium">SEO Keywords</label>
-                            <textarea
-                                className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                value={settings.keywords}
-                                onChange={(e) => handleChange('keywords', e.target.value)}
-                                placeholder="Enter keywords separated by commas"
-                            />
-                            <p className="text-xs text-muted-foreground">
-                                AI will prioritize these keywords in blog posts.
-                            </p>
-                        </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium">SEO Keywords</label>
+                                <textarea
+                                    className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    value={settings.keywords}
+                                    onChange={(e) => handleChange('keywords', e.target.value)}
+                                    placeholder="Enter keywords separated by commas"
+                                />
+                                <p className="text-xs text-muted-foreground">
+                                    AI will prioritize these keywords in blog posts.
+                                </p>
+                            </div>
 
-                        <div className="flex items-center justify-between p-4 rounded-lg border border-input bg-muted/20">
-                            <div className="space-y-0.5">
-                                <label className="text-sm font-medium">Auto-Publish Content</label>
-                                <p className="text-xs text-muted-foreground">Automatically post AI-generated content daily.</p>
+                            <div className="flex items-center justify-between p-4 rounded-lg border border-input bg-muted/20">
+                                <div className="space-y-0.5">
+                                    <label className="text-sm font-medium">Auto-Publish Content</label>
+                                    <p className="text-xs text-muted-foreground">Automatically post AI-generated content daily.</p>
+                                </div>
+                                <div
+                                    className={`h-6 w-11 rounded-full relative cursor-pointer transition-colors ${settings.autoPublish ? 'bg-primary' : 'bg-gray-200'}`}
+                                    onClick={() => handleChange('autoPublish', !settings.autoPublish)}
+                                >
+                                    <div className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${settings.autoPublish ? 'right-1' : 'left-1'}`} />
+                                </div>
                             </div>
-                            <div
-                                className={`h-6 w-11 rounded-full relative cursor-pointer transition-colors ${settings.autoPublish ? 'bg-primary' : 'bg-gray-200'}`}
-                                onClick={() => handleChange('autoPublish', !settings.autoPublish)}
-                            >
-                                <div className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${settings.autoPublish ? 'right-1' : 'left-1'}`} />
-                            </div>
-                        </div>
-                    </CardContent>
-                    <CardFooter>
-                        <Button className="ml-auto" onClick={handleSave} disabled={loading}>
-                            {loading ? "Saving..." : "Save Changes"}
-                        </Button>
-                    </CardFooter>
-                </Card>
-            </FadeIn>
-        </StaggerContainer>
+                        </CardContent>
+                        <CardFooter>
+                            <Button className="ml-auto" onClick={handleSave} disabled={loading}>
+                                {loading ? "Saving..." : "Save Changes"}
+                            </Button>
+                        </CardFooter>
+                    </Card>
+                </FadeIn>
+            </StaggerContainer>
         </div >
     );
 }
