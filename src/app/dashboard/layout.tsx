@@ -3,13 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
     LayoutDashboard,
     Settings,
     CreditCard,
     LogOut,
-    Sparkles,
     Menu,
     X,
     User,
@@ -17,6 +15,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/ui/logo";
 
 const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -51,10 +50,7 @@ export default function DashboardLayout({
             >
                 <div className="h-16 flex items-center px-6 border-b border-border">
                     <Link href="/dashboard" className="flex items-center gap-2">
-                        <Sparkles className="h-6 w-6 text-primary" />
-                        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-violet-500">
-                            NanoReply
-                        </span>
+                        <Logo className="h-8 w-8" />
                     </Link>
                     <button
                         className="ml-auto lg:hidden"

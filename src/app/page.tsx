@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  Sparkles,
   CheckCircle2,
   Menu,
   X,
 } from "lucide-react";
 import { useState } from "react";
+import { Logo } from "@/components/ui/logo";
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,12 +21,7 @@ export default function LandingPage() {
       <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative">
-              <Sparkles className="h-6 w-6 text-primary" />
-            </div>
-            <span className="text-xl font-bold text-foreground">
-              NanoReply
-            </span>
+            <Logo className="h-8 w-8" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -269,8 +264,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="space-y-4">
               <Link href="/" className="flex items-center gap-2">
-                <Sparkles className="h-6 w-6 text-primary" />
-                <span className="text-xl font-bold text-gray-900">NanoReply</span>
+                <Logo className="h-6 w-6" />
               </Link>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Automated growth for Google Business Profile. Save time, improve rankings, and grow your business.
@@ -295,14 +289,14 @@ export default function LandingPage() {
             <div>
               <h4 className="font-semibold mb-4 text-gray-900">Support</h4>
               <ul className="space-y-3 text-sm text-muted-foreground">
-                <li><a href="mailto:support@nanoreply.com" className="hover:text-primary transition-colors">Contact Us</a></li>
+                <li><a href="mailto:support@replybuzz.com" className="hover:text-primary transition-colors">Contact Us</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Help Center</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Status</a></li>
               </ul>
             </div>
           </div>
           <div className="pt-8 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <p>&copy; 2026 NanoReply. All rights reserved.</p>
+            <p>&copy; 2026 ReplyBuzz. All rights reserved.</p>
             <div className="flex items-center gap-6">
               <a href="#" className="hover:text-primary transition-colors">Twitter</a>
               <a href="#" className="hover:text-primary transition-colors">LinkedIn</a>

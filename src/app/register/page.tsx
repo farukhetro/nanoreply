@@ -2,11 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Sparkles, ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "@/components/providers/toast-provider";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Logo } from "@/components/ui/logo";
 
 export default function RegisterPage() {
     const { toast } = useToast();
@@ -39,12 +40,7 @@ export default function RegisterPage() {
             <div className="w-full max-w-md relative z-10">
                 <div className="text-center mb-8">
                     <Link href="/" className="inline-flex items-center gap-2 mb-4 group">
-                        <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center transition-colors">
-                            <Sparkles className="h-6 w-6 text-primary" />
-                        </div>
-                        <span className="text-2xl font-bold text-gray-900">
-                            NanoReply
-                        </span>
+                        <Logo className="h-10 w-10" />
                     </Link>
                     <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Create an Account</h1>
                     <p className="text-muted-foreground mt-2 text-lg">

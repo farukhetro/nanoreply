@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "NanoReply - AI Automation for Google Business",
+  title: "ReplyBuzz - AI Automation for Google Business",
   description: "Automate Google reviews, posts, and images with AI.",
 };
 
