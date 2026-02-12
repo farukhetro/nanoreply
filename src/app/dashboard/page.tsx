@@ -14,6 +14,7 @@ import {
     ExternalLink
 } from "lucide-react";
 import Link from "next/link";
+import GbpConnect from "@/components/GbpConnect";
 
 export default function DashboardPage() {
     return (
