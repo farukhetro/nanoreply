@@ -40,10 +40,7 @@ export default function DashboardPage() {
             });
 
             // Simulate data fetch for stats (can be connected to DB later)
-            setTimeout(() => {
-                setStats({ blogPosts: 15, aiPhotos: 13, repliesToday: 20, repliesMonth: 250 });
-                setLoading(false);
-            }, 500);
+            setLoading(false);
         };
 
         fetchUser();
