@@ -133,17 +133,11 @@ export default function SettingsPage() {
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium">Category</label>
-                                    <select
-                                        className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    <Input
                                         value={settings.category}
                                         onChange={(e) => handleChange('category', e.target.value)}
-                                    >
-                                        <option value="dental">Dental Clinic</option>
-                                        <option value="restaurant">Restaurant</option>
-                                        <option value="retail">Retail Store</option>
-                                        <option value="service">Service Provider</option>
-                                        <option value="real_estate">Real Estate</option>
-                                    </select>
+                                        placeholder="e.g. Dental Clinic, Marketing Agency, Restaurant"
+                                    />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium">Location</label>
