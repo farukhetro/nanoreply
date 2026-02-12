@@ -49,8 +49,29 @@ export default function SettingsPage() {
         }, 1000);
     };
 
-    const handleConnect = () => {
-        toast("Redirecting to Google Business Profile...", "info");
+    const handleConnect = async () => {
+        try {
+            toast("Redirecting to Google Business Profile...", "info");
+            const { createClient } = await import('@/lib/supabase/client');
+            const supabase = createClient();
+
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    redirectTo: `${location.origin}/auth/callback?next=/dashboard/settings`,
+                    scopes: 'https://www.googleapis.com/auth/business.manage',
+                    queryParams: {
+                        access_type: 'offline', // vital for refresh tokens
+                        prompt: 'consent', // force consent to ensure we get the refresh token
+                    },
+                },
+            });
+
+            if (error) throw error;
+        } catch (error) {
+            console.error(error);
+            toast("Failed to initiate connection", "error");
+        }
     };
 
     const handleChange = (field: string, value: any) => {
