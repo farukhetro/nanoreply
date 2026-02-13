@@ -333,9 +333,9 @@ export default function LandingPage() {
             <div>
               <h4 className="font-semibold mb-4 text-gray-900">Support</h4>
               <ul className="space-y-3 text-sm text-muted-foreground">
-                <li><a href="mailto:support@replybuzz.com" className="hover:text-primary transition-colors">Contact Us</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Status</a></li>
+                <li><Link href="/support/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
+                <li><Link href="/support/help" className="hover:text-primary transition-colors">Help Center</Link></li>
+                <li><Link href="/support/status" className="hover:text-primary transition-colors">Status</Link></li>
               </ul>
             </div>
           </div>
@@ -348,8 +348,8 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-      </footer>
-    </div>
+      </footer >
+    </div >
   );
 }
 

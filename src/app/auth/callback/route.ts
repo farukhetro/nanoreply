@@ -9,12 +9,16 @@ export async function GET(request: Request) {
 
     if (code) {
         const supabase = await createClient()
-        const { error } = await supabase.auth.exchangeCodeForSession(code)
-        if (!error) {
+        console.log("Auth Callback: exchanging code for session...");
+        const { error, data } = await supabase.auth.exchangeCodeForSession(code)
+
+        if (error) {
+            console.error("Auth Callback Error:", error.message);
+        } else {
+            console.log("Auth Callback Success: Session created for user", data.user?.id);
             const forwardedHost = request.headers.get('x-forwarded-host') // original origin before load balancer
             const isLocalEnv = process.env.NODE_ENV === 'development'
             if (isLocalEnv) {
-                // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
                 return NextResponse.redirect(`${origin}${next}`)
             } else if (forwardedHost) {
                 return NextResponse.redirect(`https://${forwardedHost}${next}`)
