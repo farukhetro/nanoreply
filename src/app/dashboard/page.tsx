@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Image as ImageIcon, FileText, CheckCircle2 } from "lucide-react";
+import { ConnectGbpCard } from "@/components/connect-gbp-card";
 
 export default async function DashboardPage({
     searchParams,
@@ -26,25 +27,11 @@ export default async function DashboardPage({
     const subscription = subRes.data;
     const isActive = subscription?.status === 'active';
 
+
+
     // 1. Connect GBP State (Check first)
     if (gbpAccounts.length === 0) {
-        return (
-            <div className="max-w-md mx-auto p-8 mt-10">
-                <Card className="text-center border-2 border-primary/20">
-                    <CardHeader>
-                        <CardTitle className="text-2xl">Connect Google Business</CardTitle>
-                        <CardDescription>Link your profile to start automating replies & posts.</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <form action="/api/gbp/connect" method="POST">
-                            <Button type="submit" size="lg" className="w-full font-bold">
-                                Connect GBP Account
-                            </Button>
-                        </form>
-                    </CardContent>
-                </Card>
-            </div>
-        );
+        return <ConnectGbpCard />;
     }
 
     // 2. Paywall Redirect
