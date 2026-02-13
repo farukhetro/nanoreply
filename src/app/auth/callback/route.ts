@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@/utils/supabase/server'
 
 export async function GET(request: Request) {
     const { searchParams, origin } = new URL(request.url)
@@ -9,15 +9,67 @@ export async function GET(request: Request) {
 
     if (code) {
         const supabase = await createClient()
-        console.log("Auth Callback: exchanging code for session...");
-        const { error, data } = await supabase.auth.exchangeCodeForSession(code)
+        const { data, error } = await supabase.auth.exchangeCodeForSession(code)
 
-        if (error) {
-            console.error("Auth Callback Error:", error.message);
-        } else {
-            console.log("Auth Callback Success: Session created for user", data.user?.id);
-            const forwardedHost = request.headers.get('x-forwarded-host') // original origin before load balancer
+        if (!error) {
+            const session = data?.session
+            const user = session?.user
+            const providerToken = session?.provider_token
+            const providerRefreshToken = session?.provider_refresh_token
+
+            if (user && providerToken) {
+                try {
+                    // Fetch GBP Account Name
+                    const accRes = await fetch('https://mybusinessbusinessinformation.googleapis.com/v1/accounts', {
+                        headers: { Authorization: `Bearer ${providerToken}` }
+                    })
+
+                    if (accRes.ok) {
+                        const accData = await accRes.json()
+                        const accountName = accData.accounts?.[0]?.name // e.g. "accounts/12345"
+
+                        if (accountName) {
+                            const payload: any = {
+                                user_id: user.id,
+                                access_token: providerToken,
+                                account_name: accountName,
+                                updated_at: new Date().toISOString(),
+                            }
+
+                            if (providerRefreshToken) {
+                                payload.refresh_token = providerRefreshToken
+                            }
+
+                            // Check existing
+                            const { data: existing } = await supabase
+                                .from('gbp_accounts')
+                                .select('id')
+                                .eq('user_id', user.id)
+                                .maybeSingle()
+
+                            if (existing) {
+                                await supabase
+                                    .from('gbp_accounts')
+                                    .update(payload)
+                                    .eq('id', existing.id)
+                            } else if (providerRefreshToken) {
+                                // Only insert if we have refresh token (initial connection)
+                                await supabase
+                                    .from('gbp_accounts')
+                                    .insert(payload)
+                            } else {
+                                console.warn('Missing refresh token on initial GBP connect')
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.error('Failed to store GBP tokens:', e)
+                }
+            }
+
+            const forwardedHost = request.headers.get('x-forwarded-host')
             const isLocalEnv = process.env.NODE_ENV === 'development'
+
             if (isLocalEnv) {
                 return NextResponse.redirect(`${origin}${next}`)
             } else if (forwardedHost) {
@@ -25,6 +77,8 @@ export async function GET(request: Request) {
             } else {
                 return NextResponse.redirect(`${origin}${next}`)
             }
+        } else {
+            console.error("Auth Callback Error:", error)
         }
     }
 

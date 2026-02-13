@@ -106,9 +106,9 @@ export default function HelpPage() {
             <div className="text-center mt-12 bg-gray-50 rounded-lg p-8 border border-gray-100">
                 <h3 className="text-lg font-semibold mb-2">Still have questions?</h3>
                 <p className="text-muted-foreground mb-4">Can't find the answer you're looking for?</p>
-                <Button asChild>
-                    <a href="/support/contact">Contact Support</a>
-                </Button>
+                <a href="/support/contact">
+                    <Button>Contact Support</Button>
+                </a>
             </div>
         </div>
     );

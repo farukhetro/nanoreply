@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
 
 export async function POST() {
-    const clientId = "528485297873-dkkp0md77547vd796ghjoftmlu2pih42.apps.googleusercontent.com";
+    const clientId = process.env.GOOGLE_CLIENT_ID;
+    if (!clientId) {
+        return NextResponse.json({ error: "Missing GOOGLE_CLIENT_ID env var" }, { status: 500 });
+    }
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://replybuzz.online";
     const finalRedirectUri = `${baseUrl}/api/gbp/callback`;
 
